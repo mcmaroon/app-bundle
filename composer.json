@@ -25,7 +25,9 @@
         "knplabs/doctrine-behaviors": "1.4.0",
         "a2lix/translation-form-bundle": "^2.1",
         "egeloen/ckeditor-bundle": "^5.0",
-        "cboden/ratchet": "0.3.*",
+        "cboden/ratchet": "0.3.*",        
+        "jms/i18n-routing-bundle": "dev-master",
+        "jms/translation-bundle": "dev-master",
         "consolidation/robo": "1.0.6"
     },
     "require-dev": {
