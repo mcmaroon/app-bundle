@@ -89,7 +89,7 @@
                     "
 
                     data-id="{{ child.getId() }}"
-                    data-parent-id="{% if child.getParent() is defined and child.getParent() is not null %}{{ child.getParent().getId() }}{% else %}0{% endif %}"
+                    data-parent-id="{#{% if child.getParent() is defined and child.getParent() is not null %}{{ child.getParent().getId() }}{% else %}0{% endif %}#}"
                     data-neighbor-id="{% if loop.first %}0{% else %}{% if children[childId][key - 1] is defined %}{{ children[childId][key - 1].getId() }}{% else %}0{% endif %}{% endif %}">
                     <table class="table table-tree-list {% if child.getActive() %}bg-success{% else %}bg-warning{% endif %}">
                         <tr>
