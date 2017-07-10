@@ -1,0 +1,41 @@
+{% extends "AppAppBundle::admin.html.twig" %}
+
+{% import 'AppAppBundle:Macro:helpers.html.twig' as helperMacros %}
+
+{% block body %}
+
+    {% block edithead %}
+        {% if classShortName is defined %}
+            <div class="page-header">
+                <h1>{{ ('adminmenu.'~classShortName~'.edit')|trans }}</h1>
+            </div>
+        {% endif %}
+    {% endblock edithead %}
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}    
+
+    {% block editbuttons %}
+        {% if classShortName is defined %}
+            {{ include('AppAppBundle::Macro/form_buttons_wrapper.html.twig', { 'routing': classShortName }) }}
+        {% endif %}
+    {% endblock editbuttons %}
+
+    {% block edittop %}
+        {{ form_row(form.name) }}
+    {% endblock edittop %}
+
+    {% block editmiddle %}
+
+    {% endblock editmiddle %}
+
+    {% block editbottom %}
+        {{ form_row(form.active) }}
+    {% endblock editbottom %}
+
+    {{ form_end(form) }}
+    
+    {% block afterform %}
+    {% endblock afterform %}
+
+{% endblock body %}

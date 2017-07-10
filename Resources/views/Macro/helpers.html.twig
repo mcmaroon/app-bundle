@@ -1,0 +1,116 @@
+{% macro item(item, macrosFilePath, macroName) %}
+    {% import macrosFilePath as macrosFile %}
+    <div class="item" data-id="{{ item.id }}">
+        {{ attribute(macrosFile, macroName, [item]) }}
+    </div>
+{% endmacro %}
+
+{% macro player(entity) %}
+    {% if entity is not null and entity.convertEnd is not null %}
+        <video id="player" controls="controls" preload="auto" style="width: 100%; height: 100%;">
+            <source type="video/webm" src="{{ asset(entity.getWebPathByFormatType('webm')) }}" />
+            <source type="video/mp4" src="{{ asset(entity.getWebPathByFormatType('mp4')) }}" />
+        </video>
+    {% endif %}
+{% endmacro %}
+
+{% macro convertprogress(entity) %}
+    {% if entity is not null %}
+        <div data-id="{{ entity.id }}" class="progress {% if entity.convertEnd is null %}waiting{% endif %}">
+            <div class="progress-bar {% if entity.convertEnd is not null %}progress-bar-success{% endif %}" {% if entity.convertEnd is not null %}style="width: 100%"{% endif %}>
+                {% if entity.convertEnd is not null %}{{ entity.getConvertTimeDiff }}{% endif %}
+            </div>
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro fileUpload(form, entity) %}
+    {% if entity is not null %}
+        <div class="file-upload-wrapper">
+            <div class="file-upload-wrapper-content">
+                {% if entity.getWebPath is not null %}
+                    <img class="img-responsive" src="{{ entity.getWebPath | imagine_filter('thumb_admin_default') }}" alt="">  
+                {% endif %}
+            </div>
+            <div class="file-upload-wrapper-form">
+                {{ form_row(form.file) }}        
+            </div>
+        </div> 
+    {% endif %}
+{% endmacro %}
+
+{% macro bytesToSize(bytes) %}
+    {% spaceless %}
+        {% set kilobyte = 1024 %}
+        {% set megabyte = kilobyte * 1024 %}
+        {% set gigabyte = megabyte * 1024 %}
+        {% set terabyte = gigabyte * 1024 %}
+
+        {% if bytes < kilobyte %}
+            {{ bytes ~ ' B' }}
+        {% elseif bytes < megabyte %}
+            {{ (bytes / kilobyte)|number_format(2, '.') ~ ' KB' }}
+        {% elseif bytes < gigabyte %}
+            {{ (bytes / megabyte)|number_format(2, '.') ~ ' MB' }}
+        {% elseif bytes < terabyte %}
+            {{ (bytes / gigabyte)|number_format(2, '.') ~ ' GB' }}
+        {% else %}
+            {{ (bytes / terabyte)|number_format(2, '.') ~ ' TB' }}
+        {% endif %}
+    {% endspaceless %}
+{% endmacro %}
+
+{% macro secondsToTime(bytes) %}
+    {% spaceless %}
+        {% set kilobyte = 60 %}
+        {% set megabyte = kilobyte * 60 %}
+
+        {% if bytes < kilobyte %}
+            {{ bytes ~ ' Sec' }}
+        {% elseif bytes < megabyte %}
+            {{ (bytes / kilobyte)|number_format(2, '.') ~ ' Min' }}
+        {% else %}
+            {{ (bytes / megabyte)|number_format(2, '.') ~ ' H' }}
+        {% endif %}
+    {% endspaceless %}
+{% endmacro %}
+
+{% macro treeList(children, childId, currentItemParents, deep) %}
+    {% import _self as helperMacros %}
+    {% if children[childId] is defined  %}
+        <ul class="tree-list sortable">
+            {% for key,child in children[childId] %}                
+
+                <li class="
+                    tree-leaf ui-state-default
+                    {% if currentItemParents[child.getId()] is defined %} item-parent {% endif %}
+                    {% if currentItemParents[child.getId()] is not defined %} item-collapse {% endif %}
+                    {% if children[child.getId()] is defined %} item-collapsible {% endif %}
+                    "
+
+                    data-id="{{ child.getId() }}"
+                    data-parent-id="{% if child.getParent() is defined and child.getParent() is not null %}{{ child.getParent().getId() }}{% else %}0{% endif %}"
+                    data-neighbor-id="{% if loop.first %}0{% else %}{% if children[childId][key - 1] is defined %}{{ children[childId][key - 1].getId() }}{% else %}0{% endif %}{% endif %}">
+                    <table class="table table-tree-list {% if child.getActive() %}bg-success{% else %}bg-warning{% endif %}">
+                        <tr>
+                            <td class="id">
+                                <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+                            </td>
+                            <td class="name">
+                                {{ child|default('...') }}
+                            </td>
+                            <td class="options">
+                                <ul class="nav nav-pills pull-right">                        
+                                    <li role="presentation" class="active"><a href="{{ child.getId() }}/edit">{{ 'global.edit'|trans }}</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                    {% if (children[child.getId()] is defined) and currentItemParents[child.getId()] is defined %}
+                        {{ helperMacros.treeList(children, child.getId(), currentItemParents, deep + 1) }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endmacro %}

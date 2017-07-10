@@ -1,0 +1,77 @@
+<div id="preview" class="{{ classShortName|lower|default('') }}">
+    {% block adminpreview %}
+
+        {% block adminpreviewbefore %}
+        {% endblock adminpreviewbefore %}
+
+        <table class="table table-condensed">
+            {% block adminpreviewtop %}
+                <tr>
+                    <th>{{ 'filters.name.label'|trans }}</th>
+                    <th>{{ 'filters.value.label'|trans }}</th>
+                </tr>                
+                <tr>
+                    <td>{{ 'filters.id.label'|trans }}</td>
+                    <td><a href="{{ path(classShortName~'_edit', {'id': entity.id} ) }}">{{ entity.id }}</a></td>
+                </tr>
+                <tr>
+                    <td>{{ 'filters.name.label'|trans }}</td>
+                    <td><a href="{{ path(classShortName~'_edit', {'id': entity.id} ) }}">{{ entity }}</a></td>
+                </tr>     
+            {% endblock adminpreviewtop %}
+
+            {% block adminpreviewmiddle %}
+                {% if entity.tags is defined %}
+                    <tr>
+                        <td>{{ 'filters.tags.label'|trans }}</td>
+                        <td>{{ entity.tags|join(', ') }}</td>
+                    </tr>
+                {% endif %}
+
+                {% if entity.photos is defined %}
+                    <tr>
+                        <td>{{ 'filters.image.label'|trans }}</td>
+                        <td>
+                            <div id="preview-carousel-photos" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner" role="listbox">
+                                    {% for pk,photo in entity.photos %}
+                                        <div class="item {% if pk == 0 %}active{% endif %}">
+                                            <img class="img-responsive" src="{{ photo.getWebPath | imagine_filter('thumb_admin_large') }}" alt="" />
+                                        </div>                        
+                                    {% endfor %}
+                                </div>
+                                <a class="left carousel-control" href="#preview-carousel-photos" role="button" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                    <span class="sr-only">{{ 'global.nav.prev'|trans }}</span>
+                                </a>
+                                <a class="right carousel-control" href="#preview-carousel-photos" role="button" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                    <span class="sr-only">{{ 'global.nav.next'|trans }}</span>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endif %}
+
+                {% if entity.description is defined %}
+                    <tr>
+                        <td>{{ 'filters.description.label'|trans }}</td>
+                        <td>{{ entity.description|raw }}</td>
+                    </tr>
+                {% endif %}
+            {% endblock adminpreviewmiddle %}
+
+            {% block adminpreviewbottom %}
+            {% endblock adminpreviewbottom %}
+
+        </table>
+
+        {% block adminpreviewafter %}
+            {# twig:globals:googleapikey #}
+            {% if googleapikey is defined and entity.latitude is defined and entity.latitude is not null and entity.longitude is defined and entity.longitude is not null %}
+                <img src="https://maps.googleapis.com/maps/api/staticmap?markers={{ entity.latitude }},{{ entity.longitude }}&zoom=10&size=260x120&key={{ googleapikey }}" />
+            {% endif %}
+        {% endblock adminpreviewafter %}
+        
+    {% endblock adminpreview %}
+</div>

@@ -1,0 +1,129 @@
+global:
+    create: Dodaj
+    submit: Zapisz
+    submitAndStay: Zapisz i zostań
+    change: Zmień
+    back: Powrót do listy
+    remove: Usuń
+    edit: Edytuj
+    prev: Podgląd
+    noresults: Brak wyników
+    search:
+        title: Szukaj
+        placeholder: Wpisz szukaną frazę
+    autocomplete:
+        searchgroup:
+            0: Nazwa
+            1: Kategorie
+            2: Tagi
+    bulk:
+        confirm: Zatwierdź
+        active: Aktywuj zaznaczone rekordy
+        unactive: Dezaktywuj zaznaczone rekordy
+    messages:
+        create:
+            success: Wpisy został utworzony.
+        bulk:
+            success: Wpisy zostały zaktualizowane.
+        edit:
+            notfound: Wpis nie został znaleziony.
+        update:
+            success: Wpis został zaktualizowany.
+            error: Błąd zmiany wpisu. Sprawdź kaskadowość relacji lub unikalne klucze.
+        remove:
+            success: Wpis został usunięty.
+            issoftdeleted: Wpis został już oznaczony jako usunięty.
+            error: Błąd usuwania wpisu.
+            forcelock: Usunięcie tego wpisu spowodowałoby kaskadowe usunięcie niezbędnych relacji. Możliwość usunięcia została zablokowana.
+            foreignkey: Błąd usuwania wpisu. Sprawdź kaskadowość relacji.
+
+adminmenu:
+    front: Strona główna
+    home: Administracja
+    toogle: "Zwiń/Rozwiń"
+    profile:
+        logout: Wyloguj
+    user:
+        default: Użytkownicy
+        list: Lista użytkowników
+        new: Dodaj użytkownika
+        edit: Edycja użytkownika
+
+filters:
+    filter: Filtruj
+    reset: Resetuj
+    bulkall: Zaznacz / Odznacz
+    resetmessage: Filtry zostały zresetowane
+    action: Akcje
+    id:
+        label: Id
+        help: 1,2,3 or 1-3 or 1,2,3,5-7
+    ip:
+        label: Ip
+        help: Adres ip
+    referer:
+        label: Referer
+        help: Adres poprzedzający
+    name:
+        label: Nazwa
+    description:
+        label: Opis
+    value:
+        label: Wartość
+    username:
+        label: Użytkownik
+    image:
+        label: Obraz
+    type:
+        label: Typ
+    created:
+        label: Utworzony
+    edited:
+        label: Edytowany
+    deleted:
+        label: Usunięty
+    latitude:
+        label: Latitude
+    longitude:
+        label: Longitude
+    postal:
+        label: Kod pocztowy
+    duration:
+        label: Długość
+    bitrate:
+        label: Bitrate
+    ext:
+        label: Rozszerzenie
+    width:
+        label: Szerokość
+    height:
+        label: Wysokość
+    size:
+        label: Rozmiar
+    dateStart:
+        label: Data początkowa
+    dateEnd:
+        label: Data końcowa
+    searched:
+        label: Wyszukano razy
+    results:
+        label: Ilość wyników
+    active:
+        label: Aktywny
+        empty: Wszystkie
+        opt1: Tak
+        opt2: Nie
+    locked:
+        label: Zablokowany
+        empty: Wszystkie
+        opt1: Tak
+        opt2: Nie
+    geolocalization:
+        label: Geolokalizacja
+
+stat:
+    enum:
+        view: Wyświetlony razy
+        usercount: Wszyscy użytkownicy
+        usercountlogin: Użytkownicy zalogowani danego dnia
+        usercountregister: Użytkownicy zarejestrowani danego dnia

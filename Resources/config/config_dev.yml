@@ -1,0 +1,13 @@
+parameters:
+    schemes: http
+    ffmpeg_path: "%kernel.root_dir%/../src/App/AppBundle/Lib/ffmpeg_win/bin/ffmpeg.exe"
+    
+assetic:
+    use_controller: true
+    assets:        
+        admin_css_map:
+            inputs: '@AppAppBundle/Resources/public/css/admin.css.map'
+            output: 'css/admin.css.map'
+
+gregwar_captcha:
+    disabled: true

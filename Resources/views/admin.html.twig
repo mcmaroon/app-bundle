@@ -1,0 +1,86 @@
+{% extends "AppAppBundle::layout.html.twig" %}
+
+{% block title %}Admin{% endblock %}
+
+{% block top %}
+    {% if is_granted('ROLE_ADMINISTRATOR') or is_granted('ROLE_SUPER_ADMIN') %}
+
+        {% set adminMenu = knp_menu_get('adminMenu') %}
+
+        <div class="navbar navbar-default navbar-admin navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#admin-navbar-collapse-1">
+                        <span class="sr-only">{{ 'adminmenu.toogle'|trans }}</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{ url('homepage') }}" title="{{ 'adminmenu.front'|trans }}"><span class="fa fa-home fa-inverse"></span></a>
+                    <a class="navbar-brand" href="{{ url('admin') }}" title="{{ 'adminmenu.home'|trans }}"><span class="fa fa-area-chart"></span></a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="admin-navbar-collapse-1">
+                    {{ knp_menu_render(adminMenu) }}
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        {% if domain_locales is defined %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <span class="icon icon-direction-left fa fa-flag"></span>
+                                    {{ 'global.language.default'|trans }}
+                                    ( {{ app.request.locale }} )
+                                </a>
+                                <ul class="dropdown-menu">
+                                    {% for key, domain in domain_locales %}
+
+                                        {% set link = '' %}
+
+                                        {% if app.request.attributes.get('_route') is not null and app.request.attributes.get('_route')|routeExists %}
+                                            {% set link = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+                                        {% endif %}
+
+                                        {% if app.request.attributes.get('_route') is not null and (app.request.attributes.get('_route')~'.'~key)|routeExists and app.request.attributes.get('_route') != 'homepage' %}
+                                            {% set link = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'locale': key})) %}
+                                        {% endif %}
+
+                                        <li>
+                                            <a class="{% if key == app.request.locale %}current{% endif %}" href="{{ ('http://'~domain) }}{{ link }}">
+                                                {{ ('global.language.'~key)|trans }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endif %}
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.userName|default('') }}<span class="caret"></span></a>
+                                {% block top_dropdown %}
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ url('security_logout') }}">{{ 'adminmenu.profile.logout'|trans }}</a></li>                                
+                                </ul>
+                            {% endblock top_dropdown %}
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock top %}
+
+{% block body %}{% endblock %}
+
+{% block stylesheets %}
+    {% stylesheets '@admin_css' output='css/admin.css' combine=true %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
+    {% endstylesheets %}
+{% endblock %}
+
+{% block javascriptsbody %}
+    {% javascripts '@jquery_js' '@bootstrap_js' '@plugin_js' '@admin_js' output='js/admin.js' combine=true %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

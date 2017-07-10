@@ -1,0 +1,98 @@
+{% extends "AppAppBundle::admin.html.twig" %}
+
+{% import 'AppAppBundle:Macro:filters.html.twig' as filterMacros %}
+
+{% block body %}
+
+    {% if classShortName is defined %}
+        <div class="page-header">
+            <h1>{{ ('adminmenu.'~classShortName~'.list')|trans }} <span class="badge">{{ pagination.getTotalItemCount }}</span></h1>
+        </div>
+    {% endif %}
+
+    {% block indexbeforeform %}
+    {% endblock indexbeforeform %}
+
+    <form novalidate=novalidate action="" method="get">
+
+        {% if app.request.query.get('sort') is not null and app.request.query.get('direction') is not null %}
+            <input type="hidden" name="sort" value="{{ app.request.query.get('sort') }}" />
+            <input type="hidden" name="direction" value="{{ app.request.query.get('direction') }}" />
+        {% endif %}
+
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr class="header filter">
+
+                        {% block indexheaderstop %}
+                            {{ filterMacros.bulkall(filters) }}
+
+                            {{ filterMacros.simple('id', null, filters, pagination) }}
+
+                            {{ filterMacros.simple('name', null, filters, pagination) }}
+                        {% endblock indexheaderstop %}
+
+                        {% block indexheadersmiddle %}
+                        {% endblock indexheadersmiddle %}
+
+                        {% block indexheadersbottom %}
+                            {{ filterMacros.double('created', null, filters, pagination, 'datepicker') }}
+                            {{ filterMacros.double('edited', null, filters, pagination, 'datepicker') }}
+                            {{ filterMacros.active('active', null, filters, pagination) }}
+                        {% endblock indexheadersbottom %}
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% if pagination.getTotalItemCount < 1 %}
+                        <tr><td><h2>{{ 'global.noresults'|trans }}</h2></td></tr>
+                    {% endif %}
+
+                    {% for entity in pagination %}
+                        <tr {% block indexrowtr %}class="{% block indexrowtrclass %}{% endblock indexrowtrclass %} {% if entity.active is defined %}{{ entity.active ? 'active' : 'warning' }}{% endif %}{% endblock indexrowtr %}">
+
+                            {% block indexrowstop %}
+                                <td>{{ filterMacros.bulkView(entity.id) }}</td>
+                                <td>{% if classShortName is defined %}<a href="{{ path(classShortName~'_edit', {'id': entity.id} ) }}">{% endif %}{{ entity.id }}{% if classShortName is defined %}</a>{% endif %}</td>
+                                <td>{% if classShortName is defined %}<a href="{{ path(classShortName~'_edit', {'id': entity.id} ) }}">{% endif %}{{ entity.obj|default('.........') }}{% if classShortName is defined %}</a>{% endif %}</td>
+                            {% endblock indexrowstop %}
+
+                            {% block indexrowsmiddle %}
+                            {% endblock indexrowsmiddle %}
+
+                            {% block indexrowsbottom %}
+                                <td>{{ filterMacros.dateView(entity.created) }}</td>
+                                <td>{{ filterMacros.dateView(entity.edited) }}</td>
+                                <td>{{ filterMacros.activeView(entity.active) }}</td>
+                            {% endblock indexrowsbottom %}
+
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% block indexbulk %}
+            <div class="bulk-action-wrapper row">
+                <div class="col-xs-18">
+                    <select class="select2 form-control input-sm" name="bulk[type]">
+                        <option value="active">{{ 'global.bulk.active'|trans }}</option>
+                        <option value="unactive">{{ 'global.bulk.unactive'|trans }}</option>
+                    </select>
+                </div>
+                <div class="col-xs-6">
+                    <button name="bulk[confirm]" value="bulkconfirm" type="submit" class="btn btn-block btn-default">{{ 'global.bulk.confirm'|trans }}</button>
+                </div>
+            </div>
+        {% endblock indexbulk %}
+
+    </form>
+
+    {% block indexafterform %}
+    {% endblock indexafterform %}
+
+    {{ knp_pagination_render(pagination) }}
+
+{% endblock body %}

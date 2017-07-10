@@ -1,0 +1,14 @@
+<div class="form-buttons-wrapper">
+    <div class="form-buttons-wrapper-content">
+        {{ form_row(form.submit) }}
+        {% if form.submitAndStay is defined  %}
+            {{ form_row(form.submitAndStay) }}
+        {% endif %}
+        {% if routing|lower|routeExists %}
+            <a class="btn btn-default" href="{{ path(routing|lower) }}">{{ 'global.back'|trans }}</a>
+        {% endif %}        
+        {% if entity.id is not null %}            
+            <a class="btn btn-danger" {% if attribute(entity, 'isDeleted') is defined and entity.isDeleted %}disabled="disabled"{% endif %} href="{{ path(routing|lower~'_delete', {'id': entity.id} ) }}">{{ 'global.remove'|trans }}</a>
+        {% endif %}
+    </div>
+</div>

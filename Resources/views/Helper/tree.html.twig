@@ -1,0 +1,27 @@
+{% extends "AppAppBundle::admin.html.twig" %}
+
+{% import 'AppAppBundle:Macro:helpers.html.twig' as helperMacros %}
+
+{% block javascriptshead %}
+    {{ parent() }}
+    {% if classShortName is defined %}
+        <script>
+        APP.settings.paths.sortable = '{{ path(classShortName~'_tree_sort') }}';
+        </script>
+    {% endif %}
+{% endblock javascriptshead %}
+
+{% block body -%}
+
+    {% if classShortName is defined %}
+
+        <div class="page-header">
+            <h1>{{ ('adminmenu.'~classShortName~'.list')|trans }}</h1>
+        </div>
+    {% endif %}
+
+    <div class="tree-wrapper tree-list-sortable" data-type="{{ classShortName }}">
+        {{ helperMacros.treeList(list, 0, null, 0) }}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+services:
+    app.log:
+        class: Symfony\Bridge\Monolog\Logger
+        arguments: [app.log]
+        calls:
+            - [pushHandler, ['@apploghandler']]
+
+    apploghandler:
+        class: 'Monolog\Handler\RotatingFileHandler'
+        arguments: ['%kernel.logs_dir%/%kernel.environment%.app.log', 30]
+    
+#    app.logEntityListener:
+#        class: Symfony\Bridge\Monolog\Logger
+#        arguments: [app.log]
+#        calls:
+#            - [pushHandler, ['@applogEntityListenerHandler']]
+#
+#    applogEntityListenerHandler:
+#        class: 'Monolog\Handler\RotatingFileHandler'
+#        arguments: ['%kernel.logs_dir%/%kernel.environment%.logEntityListener.log', 30]
+#
+#    applogentitylistener:
+#        class: App\AppBundle\EventListener\LogEntityListener
+#        arguments: ['@service_container']
+#        tags:
+#            - { name: doctrine.event_listener, event: prePersist }
+#            - { name: doctrine.event_listener, event: preUpdate }
+#            - { name: doctrine.event_listener, event: preRemove }
+
+    cache.factory.redis:
+        class: App\AppBundle\Cache\Adapter\Factory\RedisWrapperFactory
+
+    app.twig.route_exists_extension:
+        class: App\AppBundle\Twig\RouteExistsExtension
+        arguments: ["@service_container"]
+        public: false
+        tags:
+            - { name: twig.extension }
+    app.twig.parameter_extension:
+        class: App\AppBundle\Twig\ParameterExtension
+        arguments: ["@service_container"]
+        public: false
+        tags:
+            - { name: twig.extension }
+            
+    app.weight.listener:
+        class: App\AppBundle\EventListener\WeightListener
+        tags:
+            - { name: 'doctrine.event_listener', event: 'prePersist' }
+            
+#    container.entity.listener:
+#        class: App\AppBundle\EventListener\ContainerEntityListener
+#        arguments: ['@service_container']
+#        tags:
+#            - { name: doctrine.event_listener, event: postLoad }
+
+#    app.twig.seconds_to_time_extension:
+#        class: App\AppBundle\Twig\SecondsToTimeExtension
+#        public: false
+#        tags:
+#            - { name: twig.extension }
+
+#    app.successhandler:
+#        class:      App\AppBundle\EventListener\LoginSuccessHandler
+#        arguments:  ["@router", "@security.authorization_checker"]
+#        tags:
+#            - { name: 'monolog.logger', channel: 'security' }
+
+#    in  security.yml add this line for fos user bundle
+#    success_handler: app.successhandler

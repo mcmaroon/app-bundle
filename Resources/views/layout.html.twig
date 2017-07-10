@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">        
+        <title>{% block title '' %}</title>
+
+        {% block head %}
+        {% endblock head %}    
+
+        {% block stylesheets %}            
+        {% endblock %}
+
+        <script>
+            var APP = APP || {
+                settings: {
+                    baseHost: '{{ app.request.getSchemeAndHttpHost() }}',
+                    baseUrl: '{{ app.request.getBaseURL() }}',
+                    query: '{{ app.request.query.all|json_encode|raw }}',
+                    scrollingTop: 50,
+                    paths: {},
+                    translations: {}
+                }
+            };
+        </script>
+
+        {% block javascriptshead %}
+            {% set googleMapApiKey = 'google_map_api_key'|parameter %}
+            {% if googleMapApiKey is not null %}
+                <script src="https://maps.googleapis.com/maps/api/js?key={{ googleMapApiKey|trim }}"></script>
+            {% endif %}
+        {% endblock javascriptshead %}
+
+    </head>
+
+    {% block layoutformtheme %}  
+        {% if form is defined %}
+            {% form_theme form 'bootstrap_3_layout.html.twig' %}
+        {% endif %}
+    {% endblock layoutformtheme %}
+
+    <body class="{% block bodyclass %}{{ app.environment }}{% endblock bodyclass %}">
+
+        {% block top %}            
+        {% endblock top %}
+
+        <div id="container" class="{% block containerclass %}{% if is_granted('ROLE_ADMINISTRATOR') or is_granted('ROLE_SUPER_ADMIN') %}container-fluid{% else %}container{% endif %}{% endblock containerclass %}">
+
+            {% block beforealerts %}
+            {% endblock beforealerts %}
+
+            {% block alerts %}
+                <div class="alerts {% if is_granted('ROLE_ADMINISTRATOR') or is_granted('ROLE_SUPER_ADMIN') %}sr-only{% endif %}">
+                    {% for label, flashes in app.session.flashbag.all %}
+                        {% for flash in flashes %}
+                            <div class="alert alert-{{ label }} growl" data-type="{{ label }}" role="alert">
+                                <span class="alert-icon fa fa-alert-{{ label }}"></span>
+                                <span class="alert-caret fa fa-caret-right"></span>
+                                {{ flash }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            {% endblock alerts %} 
+
+            {% block afteralerts %}
+            {% endblock afteralerts %}            
+
+            {% block body %}
+
+                <div class="row cols">
+
+                    {% if block('left_top') or block('left_middle') or block('left_bottom') %}
+                        <div class="col col-left col-xs-24 col-sm-8 col-md-6">
+
+                            {% block left_top %}
+                            {% endblock left_top %}
+
+                            {% block left_middle %}
+                            {% endblock left_middle %}
+
+                            {% block left_bottom %}
+                            {% endblock left_bottom %}
+
+                        </div>
+                    {% endif %}
+
+                    <div class="col col-right {% if profileMenuChild is defined %}col-xs-24 col-sm-16 col-md-18{% else %}col-xs-24{% endif %}">
+                        {% block content %}
+                        {% endblock content %}
+                    </div>
+                </div>
+
+            {% endblock body %}
+
+        </div>
+
+        {% block footer %}
+        {% endblock footer %}
+
+        {% block javascriptsbody %}
+        {% endblock javascriptsbody %}
+
+    </body>
+</html>

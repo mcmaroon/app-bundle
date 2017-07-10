@@ -1,0 +1,125 @@
+{% macro bulkall(filters) %}
+
+    {% import _self as filtersMacro %}
+
+    {{ filtersMacro.wrapperPrefix(null, null, null, null, 'bulkall') }}
+    <div class="btn-group-vertical" role="group">
+        <button type="submit" name="filter" class="btn btn-sm btn-default">{{ ('filters.filter')|trans }}</button>
+        <button type="submit" name="reset" class="btn btn-sm {% if filters is defined and filters|length %}btn-warning{% else %}btn-default{% endif %}">{{ ('filters.reset')|trans }}</button>
+        <button type="button" class="form-bulk-all btn btn-sm btn-default">{{ ('filters.bulkall')|trans }}</button>
+    </div>
+    {{ filtersMacro.wrapperSuffix() }}
+
+{% endmacro %}
+
+{% macro base(name, transname) %}
+
+    {% import _self as filtersMacro %}
+
+    {{ filtersMacro.wrapperPrefix(name, transname, null, null, 'base') }}
+    {{ filtersMacro.wrapperSuffix() }}
+
+{% endmacro %}
+
+{% macro simple(name, transname, filters, pagination, class) %}
+
+    {% import _self as filtersMacro %}
+
+    {{ filtersMacro.wrapperPrefix(name, transname, filters, pagination, 'simple') }}
+
+    {{ filtersMacro.input(name, filters, null, class) }}
+
+    {{ filtersMacro.wrapperSuffix() }}
+
+{% endmacro %}
+
+{% macro double(name, transname, filters, pagination, class) %}
+
+    {% import _self as filtersMacro %}
+
+    {{ filtersMacro.wrapperPrefix(name, transname, filters, pagination, 'double') }}
+
+    <div class="row">
+        <div class="col-xs-24">
+            {{ filtersMacro.input((name~'_min'), filters, null, class) }}
+        </div>
+        <div class="col-xs-24">
+            {{ filtersMacro.input((name~'_max'), filters, null, class) }}
+        </div>
+    </div>
+
+    {{ filtersMacro.wrapperSuffix() }}
+
+{% endmacro %}
+
+{% macro active(name, transname, filters, pagination) %}
+
+    {% import _self as filtersMacro %}
+
+    {{ filtersMacro.wrapperPrefix(name, transname, filters, pagination, 'active') }}
+
+    <select class="filter filter-{{ name }} form-control input-sm" name="filters[{{ name }}]">
+        <option value="">{{ ('filters.'~transname|default(name)~'.empty')|trans }}</option>
+        <option value="1" {% if filters[name] is defined and filters[name] == '1' %}selected="selected"{% endif %}>{{ ('filters.'~transname|default(name)~'.opt1')|trans }}</option>
+        <option value="0" {% if filters[name] is defined and filters[name] == '0' %}selected="selected"{% endif %}>{{ ('filters.'~transname|default(name)~'.opt2')|trans }}</option>
+    </select>
+
+    {{ filtersMacro.wrapperSuffix() }}
+
+</th>
+{% endmacro %}
+
+{% macro wrapperPrefix(name, transname, filters, pagination, type) %}        
+    <th class="filter-wrapper
+    {% if pagination is defined and pagination is not null %}{% if pagination.isSorted(name) %}active{% endif %}{% endif %}
+    "
+    data-filter-wrapper-name="{{ name }}"
+    data-filter-wrapper-type="{{ type|default(name) }}"    
+    >       
+<div
+    {% if not(('filters.'~transname|default(name)~'.help') == ('filters.'~transname|default(name)~'.help')|trans) %}
+        data-toggle="tooltip" 
+        data-placement="bottom"
+        title="{{ ('filters.'~transname|default(name)~'.help')|trans }}"        
+    {% endif %}
+    >
+
+    {% if pagination is defined and pagination is not null %}
+        {{ knp_pagination_sortable(pagination, ('filters.'~transname|default(name)~'.label')|trans, name) }}
+    {% else %}
+        {% if transname|default(name) is not null %}
+            {{ ('filters.'~transname|default(name)~'.label')|trans }}
+        {% endif %}
+    {% endif %}
+{% endmacro %}
+
+{% macro wrapperSuffix() %}
+</div>
+</th>
+{% endmacro %}
+
+{% macro input(name, filters, type, class) %}
+    <input type="{{ type|default('text') }}" class="filter filter-{{ name }} {{ class|default('') }} form-control input-sm" name="filters[{{ name }}]" value="{% if filters[name] is defined %}{{ filters[name]|raw }}{% endif %}" />
+{% endmacro %}
+
+{% macro bulkView(value) %}
+    <input name="bulk[ids][{{ value|default(0) }}]" type="checkbox" class="form-bulk-ids form-control input-sm" />
+{% endmacro %}
+
+{% macro dateView(value) %}
+    {% if value %}{{ value|date('Y-m-d H:i:s') }}{% else %}-{% endif %}
+{% endmacro %}
+
+{% macro activeView(value) %}
+    <div class="text-center">
+        {% if value|default(0) %}
+            <span class="fa fa-lg fa-check-circle fa-success"></span>
+        {% else %}
+            <span class="fa fa-lg fa-circle-o fa-danger"></span>
+        {% endif %}
+    </div>
+{% endmacro %}
+
+{% macro infoView(entityNamespace, id) %}
+    <span class="preview fa fa-info" data-type="{{ entityNamespace|default('default') }}" data-id="{{ id|default(0) }}"></span>
+{% endmacro %}

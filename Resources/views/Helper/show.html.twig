@@ -1,0 +1,13 @@
+{% extends "AppAppBundle::admin.html.twig" %}
+
+{% block body %}
+    
+    {% block showhead %}    
+        {% if classShortName is defined %}
+            <div class="page-header">
+                <h1>{{ ('adminmenu.'~classShortName~'.show')|trans }}</h1>
+            </div>
+        {% endif %}
+    {% endblock showhead %}
+    
+{% endblock body %}

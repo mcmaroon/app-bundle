@@ -1,0 +1,7 @@
+admin_helper_preview:
+    path:     /helpers/preview/{entityNamespace}/{id}
+    defaults: { _controller: "AppAppBundle:AdminHelper:preview", entityNamespace: "DefaultEntity", id: 0 }
+    
+admin_helper_sort:
+    path:     /helpers/sort/{entityNamespace}
+    defaults: { _controller: "AppAppBundle:AdminHelper:sort", entityNamespace: "DefaultEntity" }
