@@ -194,7 +194,7 @@ abstract class AbstractController extends Controller implements AbstractControll
             try {
                 $em->flush();
                 
-                $appEntityEvent = new AppEntityEvent($entity);
+                $appEntityEvent = new AppEntityEvent($entity, $request);
                 $this->get('event_dispatcher')->dispatch(AppEntityEvent::EVENT_UPDATE, $appEntityEvent);
                 
                 $this->updateActionVars($request, $id);
@@ -230,7 +230,7 @@ abstract class AbstractController extends Controller implements AbstractControll
             $em->persist($entity);
             $em->flush();
             
-            $appEntityEvent = new AppEntityEvent($entity);
+            $appEntityEvent = new AppEntityEvent($entity, $request);
             $this->get('event_dispatcher')->dispatch(AppEntityEvent::EVENT_CREATE, $appEntityEvent);
 
             $this->addFlash('success', $translated->trans('global.messages.create.success'));
@@ -321,6 +321,9 @@ abstract class AbstractController extends Controller implements AbstractControll
             $this->addFlash('warning', $translated->trans('global.messages.remove.issoftdeleted'));
         } else {
             try {
+                $appEntityEvent = new AppEntityEvent($entity, $request);
+                $this->get('event_dispatcher')->dispatch(AppEntityEvent::EVENT_DELETE, $appEntityEvent);
+            
                 $this->deleteActionBeforeFlush($entity);
                 $em->remove($entity);
                 $em->flush();                                                
