@@ -10,6 +10,10 @@ trait UploadFileOrientation
      * @ORM\Column(type="boolean", options={"default" = 0})
      */
     protected $orientation = 0;
+    private $orientationMap = [
+        0 => 'horizontal',
+        1 => 'vertical',
+    ];
 
     /**
      * Set orientation
@@ -32,6 +36,14 @@ trait UploadFileOrientation
     public function getOrientation()
     {
         return (boolean) $this->orientation;
+    }
+
+    public function getOrientationName()
+    {
+        if (\array_key_exists((int) $this->orientation, $this->orientationMap)) {
+            return \strtolower($this->orientationMap[(int) $this->orientation]);
+        }
+        return '';
     }
 
     /**
