@@ -1,3 +1,6 @@
+// font-awesome override
+$fa-font-path:        "../css/fonts";
+
 @import "bootstrap/_bootstrap";
 @import 'font-awesome/font-awesome';
 @import "plugins/chosen";
