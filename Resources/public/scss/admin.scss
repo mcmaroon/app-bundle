@@ -1,3 +1,237 @@
 @import "bootstrap/_bootstrap";
 @import 'font-awesome/font-awesome';
 @import "plugins/chosen";
+
+// override variables only admin
+$body-bg:               #fff;
+
+$tooltip-color:           $body-bg;
+$tooltip-bg:              $brand-info;
+
+$font-size-base:          11px;
+$font-size-large:         ceil(($font-size-base * 0.85));
+$font-size-small:         ceil(($font-size-base * 0.65));
+
+$font-size-h1:            floor(($font-size-base * 2.15));
+$font-size-h2:            floor(($font-size-base * 1.7));
+$font-size-h3:            ceil(($font-size-base * 1.25));
+$font-size-h4:            $font-size-base;
+$font-size-h5:            ceil(($font-size-base * 0.85));
+$font-size-h6:            ceil(($font-size-base * 0.65));
+
+$padding-small-vertical:  2px;
+$input-height-small:      (floor($font-size-small * $line-height-small) + ($padding-small-vertical * 2));
+
+$fa-inverse:              $brand-info;
+$modal-header-border-color: $body-bg;
+
+.navbar-admin {
+    li {
+        &.current_ancestor, &.current {
+            background-color: $brand-info;
+            > a {
+                color: $body-bg;
+                font-weight: bold;
+                &:hover, &:active, &:focus {
+                    color: $body-bg;
+                    background-color: darken($brand-info, 10%);
+                }
+            }
+            &:hover, &:active, &:focus {
+                background-color: darken($brand-info, 10%);
+            }
+        }
+    }
+}
+
+.tooltip {
+    font-size: $font-size-h4;
+    .tooltip-inner {
+        color: $tooltip-color;
+        background-color: $tooltip-bg;
+    }
+}
+
+.fa {
+    &.fa-success {
+        color: $brand-success;
+    }
+    &.fa-danger {
+        color: $brand-danger;
+    }
+    &.fa-info {
+        color: $brand-info;
+    }
+}
+
+#container {
+    padding-top: $navbar-height;
+    padding-bottom: ($navbar-height * 4);
+}
+
+.form-buttons-wrapper {
+    margin: $padding-base-vertical 0;
+    body.fixed & {
+        position: fixed;
+        z-index: $zindex-navbar;
+        top: ($navbar-height + 5);
+    }
+    .form-buttons-wrapper-content {
+        position: relative;
+        body.fixed & {
+            padding: $padding-small-vertical $padding-small-horizontal;
+            border-radius: $border-radius-base;
+        }
+        > * {
+            display: inline-block;
+        }
+        .form-group {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.floatThead-container {
+    overflow: visible !important;
+}
+
+table {
+    &.floatThead-table {
+        background-color: $body-bg;
+    }
+    tr {
+        td {
+            white-space: nowrap;
+        }
+    }
+    .filter-wrapper {
+        min-width: 50px;
+        a {
+            font-size: ($font-size-base - 1);
+        }
+        .form-control {
+            padding: $padding-small-vertical;
+        }
+        &[data-filter-wrapper-type="bulkall"] {
+            min-width: 110px;
+        }
+    }
+}
+
+.overflow-y {
+    max-height: 288px;
+    overflow-y: scroll;
+    &.large {
+        max-height: 560px;
+    }
+}
+
+.tree-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    .tree-leaf {
+        background-color: transparent;
+        border: none;
+        margin: $padding-small-vertical 0;
+    }
+    .table-tree-list {
+        margin: 0;
+        tr {
+            td {
+                white-space: unset;
+                &.id {
+                    width: 30px;
+                }
+                &.name {
+                    width: 300px;
+                }
+                &.image {
+                    width: 60px;
+                }
+            }
+        }
+    }
+    .nav {
+        > li {
+            > a {
+                padding: $padding-small-vertical $padding-small-horizontal;
+            }
+        }
+    }    
+}
+
+#form-stat {
+    #form-stat-checkboxes {
+        max-height: 288px;
+        overflow-y: scroll;
+        margin: $padding-base-vertical 0;
+        label {
+            @include user-select(none);
+        }
+    }
+}
+#stat {
+    width: 100%;
+    min-height: 400px;    
+    &.preloader {
+        @extend .preloader;
+    }
+}
+
+.preloader {
+    padding-top: $padding-base-vertical;
+    background: transparent url("../images/preloader.gif") no-repeat scroll 55% 0%;
+}
+
+.map-sync {
+    &.map-sync-active {
+        td {
+            background-color: $brand-info !important;
+        }
+    }
+}
+
+.preview {
+    cursor: help;
+    padding: $padding-small-vertical $padding-small-horizontal;
+}
+
+.file-upload-wrapper {
+    @extend .well;
+    @extend .well-sm;
+    img {
+        margin: 0 auto;
+    }
+    .file-upload-wrapper-form {
+        margin-top: $padding-base-vertical;
+        padding: $padding-large-vertical $padding-large-horizontal;
+        background-color: $brand-info;
+    }
+}
+
+.uploadmultiple {
+    .form-group {
+        > label {
+            display: none;
+        }
+    }
+}
+
+#prev-modal{
+    #preview {
+        table {
+            td {
+                white-space: normal;
+                &:first-of-type {
+                    min-width: 160px;
+                }
+            }
+        }
+        #preview-carousel-photos {
+            .carousel-inner .item img {
+                margin: 0 auto;
+            }
+        }
+    }
+}

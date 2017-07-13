@@ -5589,7 +5589,7 @@ button.list-group-item-danger {
 .embed-responsive-4by3 {
   padding-bottom: 75%; }
 
-.well {
+.well, .file-upload-wrapper {
   min-height: 20px;
   padding: 19px;
   margin-bottom: 20px;
@@ -5598,7 +5598,7 @@ button.list-group-item-danger {
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05); }
-  .well blockquote {
+  .well blockquote, .file-upload-wrapper blockquote {
     border-color: #ddd;
     border-color: rgba(0, 0, 0, 0.15); }
 
@@ -5606,7 +5606,7 @@ button.list-group-item-danger {
   padding: 24px;
   border-radius: 6px; }
 
-.well-sm {
+.well-sm, .file-upload-wrapper {
   padding: 9px;
   border-radius: 3px; }
 
@@ -9040,5 +9040,133 @@ button.close {
     background-size: 52px 37px !important;
     background-repeat: no-repeat !important; } }
 /* @end */
+.navbar-admin li.current_ancestor, .navbar-admin li.current {
+  background-color: #5bc0de; }
+  .navbar-admin li.current_ancestor > a, .navbar-admin li.current > a {
+    color: #fff;
+    font-weight: bold; }
+    .navbar-admin li.current_ancestor > a:hover, .navbar-admin li.current_ancestor > a:active, .navbar-admin li.current_ancestor > a:focus, .navbar-admin li.current > a:hover, .navbar-admin li.current > a:active, .navbar-admin li.current > a:focus {
+      color: #fff;
+      background-color: #31b0d5; }
+  .navbar-admin li.current_ancestor:hover, .navbar-admin li.current_ancestor:active, .navbar-admin li.current_ancestor:focus, .navbar-admin li.current:hover, .navbar-admin li.current:active, .navbar-admin li.current:focus {
+    background-color: #31b0d5; }
+
+.tooltip {
+  font-size: 11px; }
+  .tooltip .tooltip-inner {
+    color: #fff;
+    background-color: #5bc0de; }
+
+.fa.fa-success {
+  color: #5cb85c; }
+.fa.fa-danger {
+  color: #d9534f; }
+.fa.fa-info {
+  color: #5bc0de; }
+
+#container {
+  padding-top: 50px;
+  padding-bottom: 200px; }
+
+.form-buttons-wrapper {
+  margin: 6px 0; }
+  body.fixed .form-buttons-wrapper {
+    position: fixed;
+    z-index: 1000;
+    top: 55px; }
+  .form-buttons-wrapper .form-buttons-wrapper-content {
+    position: relative; }
+    body.fixed .form-buttons-wrapper .form-buttons-wrapper-content {
+      padding: 2px 10px;
+      border-radius: 4px; }
+    .form-buttons-wrapper .form-buttons-wrapper-content > * {
+      display: inline-block; }
+    .form-buttons-wrapper .form-buttons-wrapper-content .form-group {
+      margin-bottom: 0; }
+
+.floatThead-container {
+  overflow: visible !important; }
+
+table.floatThead-table {
+  background-color: #fff; }
+table tr td {
+  white-space: nowrap; }
+table .filter-wrapper {
+  min-width: 50px; }
+  table .filter-wrapper a {
+    font-size: 10px; }
+  table .filter-wrapper .form-control {
+    padding: 2px; }
+  table .filter-wrapper[data-filter-wrapper-type="bulkall"] {
+    min-width: 110px; }
+
+.overflow-y {
+  max-height: 288px;
+  overflow-y: scroll; }
+  .overflow-y.large {
+    max-height: 560px; }
+
+.tree-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+  .tree-list .tree-leaf {
+    background-color: transparent;
+    border: none;
+    margin: 2px 0; }
+  .tree-list .table-tree-list {
+    margin: 0; }
+    .tree-list .table-tree-list tr td {
+      white-space: unset; }
+      .tree-list .table-tree-list tr td.id {
+        width: 30px; }
+      .tree-list .table-tree-list tr td.name {
+        width: 300px; }
+      .tree-list .table-tree-list tr td.image {
+        width: 60px; }
+  .tree-list .nav > li > a {
+    padding: 2px 10px; }
+
+#form-stat #form-stat-checkboxes {
+  max-height: 288px;
+  overflow-y: scroll;
+  margin: 6px 0; }
+  #form-stat #form-stat-checkboxes label {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
+
+#stat {
+  width: 100%;
+  min-height: 400px; }
+
+.preloader, #stat.preloader {
+  padding-top: 6px;
+  background: transparent url("../images/preloader.gif") no-repeat scroll 55% 0%; }
+
+.map-sync.map-sync-active td {
+  background-color: #5bc0de !important; }
+
+.preview {
+  cursor: help;
+  padding: 2px 10px; }
+
+.file-upload-wrapper img {
+  margin: 0 auto; }
+.file-upload-wrapper .file-upload-wrapper-form {
+  margin-top: 6px;
+  padding: 10px 16px;
+  background-color: #5bc0de; }
+
+.uploadmultiple .form-group > label {
+  display: none; }
+
+#prev-modal #preview table td {
+  white-space: normal; }
+  #prev-modal #preview table td:first-of-type {
+    min-width: 160px; }
+#prev-modal #preview #preview-carousel-photos .carousel-inner .item img {
+  margin: 0 auto; }
 
 /*# sourceMappingURL=admin.css.map */
