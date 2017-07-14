@@ -132,7 +132,7 @@ assetic:
             output: 'css/fonts/fontawesome-webfont.woff2'
         jquery-ui-sprite:
             inputs: '@AppAppBundle/Resources/public/images/jquery-ui/ui-icons_444444_256x240.png'
-            output: 'images/ui-icons_444444_256x240.png'
+            output: 'css/images/ui-icons_444444_256x240.png'
         chosen-sprite:
             inputs: '@AppAppBundle/Resources/public/images/chosen-sprite.png'
             output: 'images/chosen-sprite.png'
