@@ -19,6 +19,8 @@ $fa-font-path:        "../css/fonts";
 $fa-inverse: $brand-info;
 @import 'font-awesome/font-awesome';
 @import 'jquery-ui/jquery-ui';
+@import 'jquery-ui/jquery-ui.structure.min.scss';
+@import 'jquery-ui/jquery-ui.theme.min.scss';
 @import "plugins/jquery-growl";
 @import "plugins/chosen";
 @import "plugins/owl.carousel";
