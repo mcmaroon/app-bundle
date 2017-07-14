@@ -1,6 +1,3 @@
-// font-awesome override
-$fa-font-path:        "../css/fonts";
-
 // override variables only admin
 $icon-font-path:          "../css/fonts/";
 $font-size-base:          11px;
@@ -16,6 +13,10 @@ $padding-small-vertical:  2px;
 $navbar-height: 28px;
 
 @import "bootstrap/_bootstrap";
+
+// font-awesome override
+$fa-font-path:        "../css/fonts";
+$fa-inverse: $brand-info;
 @import 'font-awesome/font-awesome';
 @import 'jquery-ui/jquery-ui';
 @import "plugins/jquery-growl";
