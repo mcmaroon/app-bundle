@@ -96,7 +96,7 @@ assetic:
                 - '@AppAppBundle/Resources/public/css/admin.css'
         preloader:
             inputs: '@AppAppBundle/Resources/public/images/preloader.gif'
-            output: 'images/preloader.gif'
+            output: 'css/images/preloader.gif'
         glyphicons-halflings-eot:
             inputs: '@AppAppBundle/Resources/public/fonts/glyphicons-halflings-regular.eot'
             output: 'css/fonts/glyphicons-halflings-regular.eot'
