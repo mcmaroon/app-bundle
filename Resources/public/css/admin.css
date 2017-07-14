@@ -11844,7 +11844,7 @@ body .ui-tooltip {
   display: block;
   width: 12px;
   height: 12px;
-  background: url("../images/chosen-sprite.png") -42px 1px no-repeat;
+  background: url("../css/images/chosen-sprite.png") -42px 1px no-repeat;
   font-size: 1px; }
   .chosen-container-single .chosen-single abbr:hover {
     background-position: -42px -10px; }
@@ -11861,7 +11861,7 @@ body .ui-tooltip {
     display: block;
     width: 100%;
     height: 100%;
-    background: url("../images/chosen-sprite.png") no-repeat 0px 2px; }
+    background: url("../css/images/chosen-sprite.png") no-repeat 0px 2px; }
 .chosen-container-single .chosen-search {
   position: relative;
   z-index: 1010;
@@ -11875,7 +11875,7 @@ body .ui-tooltip {
     height: auto;
     outline: 0;
     border: 1px solid #aaa;
-    background: url("../images/chosen-sprite.png") no-repeat 100% -20px;
+    background: url("../css/images/chosen-sprite.png") no-repeat 100% -20px;
     font-size: 1em;
     font-family: sans-serif;
     line-height: normal;
@@ -11991,7 +11991,7 @@ body .ui-tooltip {
       display: block;
       width: 12px;
       height: 12px;
-      background: url("../images/chosen-sprite.png") -42px 1px no-repeat;
+      background: url("../css/images/chosen-sprite.png") -42px 1px no-repeat;
       font-size: 1px; }
       .chosen-container-multi .chosen-choices li.search-choice .search-choice-close:hover {
         background-position: -42px -10px; }
@@ -12086,7 +12086,7 @@ body .ui-tooltip {
     border-right: none; }
   .chosen-rtl .chosen-search input[type="text"] {
     padding: 4px 5px 4px 20px;
-    background: url("../images/chosen-sprite.png") no-repeat -30px -20px;
+    background: url("../css/images/chosen-sprite.png") no-repeat -30px -20px;
     direction: rtl; }
   .chosen-rtl.chosen-container-single .chosen-single div b {
     background-position: 6px 2px; }
@@ -12103,7 +12103,7 @@ body .ui-tooltip {
   .chosen-container-multi .chosen-choices .search-choice .search-choice-close,
   .chosen-container .chosen-results-scroll-down span,
   .chosen-container .chosen-results-scroll-up span {
-    background-image: url("../images/chosen-sprite@2x.png") !important;
+    background-image: url("../css/images/chosen-sprite@2x.png") !important;
     background-size: 52px 37px !important;
     background-repeat: no-repeat !important; } }
 /* @end */
