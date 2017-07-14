@@ -130,15 +130,18 @@ assetic:
         font-awesome-woff2:
             inputs: '@AppAppBundle/Resources/public/fonts/fontawesome-webfont.woff2'
             output: 'css/fonts/fontawesome-webfont.woff2'
-        jquery-ui-sprite:
+        jquery-ui-sprite-444444:
             inputs: '@AppAppBundle/Resources/public/images/jquery-ui/ui-icons_444444_256x240.png'
             output: 'css/images/ui-icons_444444_256x240.png'
+        jquery-ui-sprite-555555:
+            inputs: '@AppAppBundle/Resources/public/images/jquery-ui/ui-icons_555555_256x240.png'
+            output: 'css/images/ui-icons_555555_256x240.png'
         chosen-sprite:
             inputs: '@AppAppBundle/Resources/public/images/chosen-sprite.png'
-            output: 'images/chosen-sprite.png'
+            output: 'css/images/chosen-sprite.png'
         chosen-sprite2x:
             inputs: '@AppAppBundle/Resources/public/images/chosen-sprite@2x.png'
-            output: 'images/chosen-sprite@2x.png'
+            output: 'css/images/chosen-sprite@2x.png'
 
 # Doctrine Configuration
 doctrine:
