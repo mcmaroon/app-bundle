@@ -6395,7 +6395,7 @@ button.close {
   src: url("../css/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0") format("embedded-opentype"), url("../css/fonts/fontawesome-webfont.woff2?v=4.7.0") format("woff2"), url("../css/fonts/fontawesome-webfont.woff?v=4.7.0") format("woff"), url("../css/fonts/fontawesome-webfont.ttf?v=4.7.0") format("truetype"), url("../css/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format("svg");
   font-weight: normal;
   font-style: normal; }
-.fa {
+.fa, table .filter-wrapper a.sortable:after {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -6452,9 +6452,9 @@ button.close {
 .fa-pull-right {
   float: right; }
 
-.fa.fa-pull-left {
+.fa.fa-pull-left, table .filter-wrapper a.fa-pull-left.sortable:after {
   margin-right: .3em; }
-.fa.fa-pull-right {
+.fa.fa-pull-right, table .filter-wrapper a.fa-pull-right.sortable:after {
   margin-left: .3em; }
 
 /* Deprecated as of 4.4.0 */
@@ -6464,9 +6464,9 @@ button.close {
 .pull-left {
   float: left; }
 
-.fa.pull-left {
+.fa.pull-left, table .filter-wrapper a.pull-left.sortable:after {
   margin-right: .3em; }
-.fa.pull-right {
+.fa.pull-right, table .filter-wrapper a.pull-right.sortable:after {
   margin-left: .3em; }
 
 .fa-spin {
@@ -12087,11 +12087,11 @@ div.vis-network-tooltip {
     color: #fff;
     background-color: #000; }
 
-.fa.fa-success {
+.fa.fa-success, table .filter-wrapper a.fa-success.sortable:after {
   color: #5cb85c; }
-.fa.fa-danger {
+.fa.fa-danger, table .filter-wrapper a.fa-danger.sortable:after {
   color: #d9534f; }
-.fa.fa-info {
+.fa.fa-info, table .filter-wrapper a.fa-info.sortable:after {
   color: #5bc0de; }
 
 #container {
@@ -12125,6 +12125,9 @@ table .filter-wrapper {
   min-width: 50px; }
   table .filter-wrapper a {
     font-size: 10px; }
+    table .filter-wrapper a.sortable:after {
+      content: "";
+      padding: 1px 5px; }
   table .filter-wrapper .form-control {
     padding: 2px; }
   table .filter-wrapper[data-filter-wrapper-type="bulkall"] {
