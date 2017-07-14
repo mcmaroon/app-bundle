@@ -80,17 +80,20 @@ table {
     .filter-wrapper {
         min-width: 50px;
         a {
-            font-size: ($font-size-base - 1);
-            &.sortable {            
-                &:after {
-                    @extend .fa;
-                    content: $fa-var-sort;
-                    padding: $padding-xs-vertical $padding-xs-horizontal;
-                }
+            text-transform: uppercase;
+            &:after {
+                @extend .fa;            
+                padding: $padding-xs-vertical $padding-xs-horizontal;
             }
-        }
+        }        
         .form-control {
             padding: $padding-small-vertical;
+        }
+        &[data-filter-wrapper-type="simple"] a:after {
+            content: $fa-var-sort;
+        }
+        &[data-filter-wrapper-type="double"] a:after {
+            content: $fa-var-calendar;
         }
         &[data-filter-wrapper-type="bulkall"] {
             min-width: 110px;
