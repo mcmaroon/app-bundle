@@ -16,9 +16,11 @@ $padding-small-vertical:  2px;
 
 @import "bootstrap/_bootstrap";
 @import 'font-awesome/font-awesome';
+@import 'jquery-ui/jquery-ui';
 @import "plugins/jquery-growl";
 @import "plugins/chosen";
 @import "plugins/owl.carousel";
+@import "plugins/vis";
 
 .navbar-admin {
     li {
