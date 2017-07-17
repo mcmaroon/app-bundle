@@ -1,6 +1,6 @@
 parameters:
     schemes: http
-    ffmpeg_path: "%kernel.root_dir%/../src/App/AppBundle/Lib/ffmpeg_win/bin/ffmpeg.exe"
+    ffmpeg_path: "%kernel.root_dir%/../vendor/mcmaroon/app-bundle/Lib/ffmpeg_win/bin/ffmpeg.exe"
     
 assetic:
     use_controller: true
