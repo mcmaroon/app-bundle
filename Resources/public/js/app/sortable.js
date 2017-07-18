@@ -151,7 +151,9 @@
 
                     if (self.selector.length) {
                         self.selector.sortable({
-                            //placeholder: "ui-state-highlight"
+                            cursor: "move",
+                            forcePlaceholderSize: true,
+                            placeholder: 'ui-state-highlight',
                             start: function (event, ui) {
                                 self.setSortableItem(ui.item);
                                 self.setSortableItemLevelRoot();
