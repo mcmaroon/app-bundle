@@ -47,6 +47,11 @@ class AdminHelperController extends Controller
             try {
                 $renderData['template'] = $this->renderView(str_replace(':', ':Admin', $entityNamespace) . ':preview.html.twig', $params);
             } catch (\Exception $exc) {
+                $log = $this->container->get('app.log');
+                $log->error('AdminHelperController:previewAction', [
+                    'code' => $exc->getCode(),
+                    'message' => $exc->getMessage()
+                ]);
                 $renderData['template'] = $this->renderView('AppAppBundle:Helper:preview.html.twig', $params);
             }
         }
