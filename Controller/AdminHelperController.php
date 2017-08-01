@@ -12,13 +12,14 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class AdminHelperController extends Controller
 {
 
-    public function previewAction($entityNamespace, $id)
+    public function previewAction($entityNamespace, $id, $templatePart = '')
     {
 
         $renderData = array(
             'entityNamespace' => $entityNamespace,
             'id' => $id,
-            'template' => ''
+            'template' => '',
+            'templatePart' => $templatePart
         );
 
         $em = $this->getDoctrine()->getManager();
@@ -45,7 +46,7 @@ class AdminHelperController extends Controller
             );
 
             try {
-                $renderData['template'] = $this->renderView(str_replace(':', ':Admin', $entityNamespace) . ':preview.html.twig', $params);
+                $renderData['template'] = $this->renderView(str_replace(':', ':Admin', $entityNamespace) . ':preview' . $templatePart . '.html.twig', $params);
             } catch (\Exception $exc) {
                 $log = $this->container->get('app.log');
                 $log->error('AdminHelperController:previewAction', [
@@ -78,9 +79,9 @@ class AdminHelperController extends Controller
         $renderData = array('status' => false);
 
         $updateItemsCount = 0;
-        
+
         if ($repository) {
-            $items = $repository->findByIds($ids);            
+            $items = $repository->findByIds($ids);
 
             foreach ($items as $item) {
                 if (isset($ids[$item->getId()])) {
