@@ -1,6 +1,6 @@
 (function ($) {
 
-    if (typeof APP === 'object' && typeof $().modal === 'function') {
+    if (typeof APP === 'object') {
 
         APP.preview = function (selector, options) {
             var self = this;
@@ -9,42 +9,42 @@
 
             self.xhr = null;
 
-            var defaults = {};
+            var defaults = {
+                entityNamespace: '',
+                templatePart: ''
+            };
 
             self.settings = $.extend({}, defaults, options);
 
-
-            self.sendRequest = function (el) {
-
-                var type = el.data('type');
-                var id = el.data('id');
-                if (typeof type !== 'string' && typeof id !== 'number') {
-                    self.xhr.abort();
-                }
+            self.sendRequest = function (id) {
 
                 if (self.xhr && self.xhr.readyState !== 4) {
                     self.xhr.abort();
                 }
+                var id = parseInt(id);
+                var el = $(self.selector).filter('[data-id="' + id + '"]');
+                var url = APP.settings.baseHost + APP.settings.baseUrl + '/admin/helpers/preview/' + self.settings.entityNamespace + '/' + id + (self.settings.templatePart ? '/' + self.settings.templatePart : '');
+                if (el) {
+                    el = el.parent();
+                }
 
                 self.xhr = $.ajax({
                     cache: false,
-                    url: APP.settings.baseHost + APP.settings.baseUrl + '/admin/helpers/preview/' + type + '/' + id,
+                    url: url,
                     method: 'POST',
                     dataType: 'json',
                     beforeSend: function () {
-                        el.parent().addClass('preloader');
+                        el.addClass('preloader');
                     },
                     complete: function () {
-                        el.parent().removeClass('preloader');
+                        el.removeClass('preloader');
                     },
                     error: function (request, status, error) {
-                        el.parent().removeClass('preloader');
-                    },
-                    success: function (response, status, request) {
-                        $('#prev-modal .modal-body').html(response.template);
-                        $('#prev-modal').modal('show');
+                        el.removeClass('preloader');
                     }
                 });
+
+                return self.xhr;
             };
 
             // ~
@@ -66,19 +66,28 @@
 
             // ~
 
+            self.handleData = function (response, status, request) {
+                if (typeof $().modal === 'function') {
+                    $('#prev-modal .modal-body').html(response.template);
+                    $('#prev-modal').modal('show');
+                }
+            };
+
+            // ~
+
             self.init = function () {
                 if (self.selector.length) {
                     self.addModal();
 
                     self.selector.click(function () {
-                        self.sendRequest($(this));
+                        self.settings.entityNamespace = $(this).data('type');
+                        var id = $(this).data('id');
+                        self.sendRequest(id).done(self.handleData);
                     });
 
                 }
 
             };
-
-            self.init();
         };
 
     }

@@ -19,7 +19,7 @@
     }
 
     if (typeof APP.preview === 'function') {
-        new APP.preview('.preview', {});
+        new APP.preview('.preview', {}).init();
     }
 
     if (typeof APP.progress === 'function' && typeof APP.settings.paths === 'object' && typeof APP.settings.paths.convertprogress === 'string') {
