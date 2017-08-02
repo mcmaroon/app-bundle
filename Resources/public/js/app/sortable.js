@@ -154,6 +154,8 @@
                             cursor: "move",
                             forcePlaceholderSize: true,
                             placeholder: 'ui-state-highlight',
+                            refreshPositions: true,
+                            iframeFix: true,
                             start: function (event, ui) {
                                 self.setSortableItem(ui.item);
                                 self.setSortableItemLevelRoot();

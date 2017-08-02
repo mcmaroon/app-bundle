@@ -13686,4 +13686,7 @@ table .filter-wrapper {
 #prev-modal #preview #preview-carousel-photos .carousel-inner .item img {
   margin: 0 auto; }
 
+.ui-state-highlight {
+  border: none; }
+
 /*# sourceMappingURL=admin.css.map */
