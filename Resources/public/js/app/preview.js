@@ -90,6 +90,50 @@
             };
         };
 
+        if (typeof $().chosen === 'function') {
+            APP.previewSelect = function (selector, options) {
+                var self = this;
+
+                self.selector = selector;
+
+                var defaults = {
+                    templatePart: '_select',
+                    previewSelectorClass: 'preview-select'
+                };
+
+                self.settings = $.extend({}, defaults, options);
+
+                self.handleData = function (response, status, request) {
+                    if (request.status === 200) {
+                        $(self.selector + '-' + self.settings.previewSelectorClass).html(response.template);
+                    }
+                };
+
+                self.appendPreviewElement = function () {
+                    var elClass = self.selector + '-' + self.settings.previewSelectorClass;
+                    if (!$(elClass).length) {
+                        $(self.selector).parent().parent().append('<div class="' + elClass.replace(".", "") + '"></div>');
+                    }
+                };
+
+                self.init = function () {
+                    if ($(self.selector).length) {
+                        self.appendPreviewElement();
+                        $(self.selector).chosen({
+                            width: '100%'
+                        });
+                        $(self.selector).chosen().change(function (event) {
+                            if (typeof APP.preview === 'function') {
+                                new APP.preview(self.selector, {
+                                    entityNamespace: self.settings.entityNamespace,
+                                    templatePart: self.settings.templatePart
+                                }).sendRequest($(event.target).val()).done(self.handleData);
+                            }
+                        });
+                    }
+                };
+            };
+        }
     }
 
 })(jQuery);
