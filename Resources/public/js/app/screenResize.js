@@ -3,6 +3,9 @@
 
         var self = this;
 
+        self.previewBreakpoint = null;
+        self.initialize = true;
+
         var defaults = {
             defultBreakpoint: 'xs',
             breakpoints: {
@@ -42,8 +45,17 @@
                     var event = new CustomEvent('screenResize');
                     event.width = obj.innerWidth;
                     event.height = obj.innerHeight;
-                    event.breakpoint = self.getCurrentBreakpoint(event.width);
+                    event.breakPoint = self.getCurrentBreakpoint(event.width);
+                    event.changeBreakpoint = false;
+                    if (self.previewBreakpoint !== null && self.previewBreakpoint !== event.breakPoint) {
+                        event.changeBreakpoint = true;
+                    }
+                    self.previewBreakpoint = event.breakPoint;
+                    event.initialize = self.initialize;
                     obj.dispatchEvent(event);
+                    if (self.initialize === true) {
+                        self.initialize = false;
+                    }
                     running = false;
                 });
             };
