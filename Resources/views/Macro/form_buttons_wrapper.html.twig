@@ -7,8 +7,8 @@
         {% if routing|lower|routeExists %}
             <a class="btn btn-default" href="{{ path(routing|lower) }}">{{ 'global.back'|trans }}</a>
         {% endif %}        
-        {% if entity.id is not null %}            
-            <a class="btn btn-danger" {% if attribute(entity, 'isDeleted') is defined and entity.isDeleted %}disabled="disabled"{% endif %} href="{{ path(routing|lower~'_delete', {'id': entity.id} ) }}">{{ 'global.remove'|trans }}</a>
+        {% if routing|lower~'_delete'|routeExists and entity.id is not null %}            
+            <a class="btn btn-danger" href="{{ path(routing|lower~'_delete', {'id': entity.id} ) }}">{{ 'global.remove'|trans }}</a>
         {% endif %}
     </div>
 </div>
