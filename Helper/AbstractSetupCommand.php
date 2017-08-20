@@ -77,9 +77,10 @@ abstract class AbstractSetupCommand extends ContainerAwareCommand implements Int
 
     protected function uploadFile($filePath)
     {
-        if (file_exists($filePath)) {
+        if (\file_exists($filePath) && \is_file($filePath)) {
+            $filePathMd = '_copy' . \md5(\rand(1, 1000000));
             $splFile = new \SplFileObject($filePath);
-            $splFileCopyPath = \str_replace('.' . $splFile->getExtension(), '_copy.' . $splFile->getExtension(), $splFile->getPathname());
+            $splFileCopyPath = \str_replace('.' . $splFile->getExtension(), $filePathMd . '.' . $splFile->getExtension(), $splFile->getPathname());
             \copy($splFile->getPathname(), $splFileCopyPath);
             return new UploadedFile($splFileCopyPath, \basename($filePath), null, null, null, true);
         }
