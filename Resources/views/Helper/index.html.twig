@@ -15,6 +15,9 @@
 
     <form novalidate=novalidate action="" method="get">
 
+        {% block indexbeforeforminner %}
+        {% endblock indexbeforeforminner %}
+        
         {% if app.request.query.get('sort') is not null and app.request.query.get('direction') is not null %}
             <input type="hidden" name="sort" value="{{ app.request.query.get('sort') }}" />
             <input type="hidden" name="direction" value="{{ app.request.query.get('direction') }}" />
@@ -57,7 +60,7 @@
                                 <td>{{ filterMacros.bulkView(entity.id) }}</td>
                                 <td>{% if classShortName is defined %}<a href="{{ path(classShortName~'_edit', {'id': entity.id} ) }}">{% endif %}{{ entity.id }}{% if classShortName is defined %}</a>{% endif %}</td>
                                 <td>{% if classShortName is defined %}<a href="{{ path(classShortName~'_edit', {'id': entity.id} ) }}">{% endif %}{{ entity.obj|default('.........') }}{% if classShortName is defined %}</a>{% endif %}</td>
-                            {% endblock indexrowstop %}
+                                {% endblock indexrowstop %}
 
                             {% block indexrowsmiddle %}
                             {% endblock indexrowsmiddle %}
@@ -88,6 +91,9 @@
             </div>
         {% endblock indexbulk %}
 
+        {% block indexafterforminner %}
+        {% endblock indexafterforminner %}
+    
     </form>
 
     {% block indexafterform %}
