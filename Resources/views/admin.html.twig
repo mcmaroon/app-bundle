@@ -52,7 +52,7 @@
                                 {% if 'fos_user_security_logout'|routeExists %}
                                     {% set logoutRouting = url('fos_user_security_logout') %}
                                 {% endif %}
-                                {% if is not null logoutRouting %}
+                                {% if not is null logoutRouting %}
                                     <li class="dropdown-item">
                                         <a href="{{ logoutRouting }}">{{ 'adminmenu.profile.logout'|trans }}</a>
                                     </li>
