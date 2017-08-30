@@ -3,6 +3,10 @@ body {
     padding-bottom: ($spacer * 4);
 }
 
+.navbar {
+    @include box-shadow($btn-box-shadow);
+}
+
 .fa {
     &.fa-success {
         color: theme-color("success");
@@ -23,7 +27,7 @@ body {
     @extend .btn-group-sm;
     body.fixed & {
         position: fixed;
-        z-index: $zindex-tooltip;
+        z-index: $zindex-dropdown;
         top: ($spacer * 4);
         left: $card-deck-margin;
     }
