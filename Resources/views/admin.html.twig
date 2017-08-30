@@ -45,7 +45,18 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.userName|default('') }}<span class="caret"></span></a>
                             {% block top_dropdown %}
                             <ul class="dropdown-menu">
-                                <li class="dropdown-item"><a href="{{ url('security_logout') }}">{{ 'adminmenu.profile.logout'|trans }}</a></li>                                
+                                {% set logoutRouting = null %}
+                                {% if 'security_logout'|routeExists %}
+                                    {% set logoutRouting = url('security_logout') %}
+                                {% endif %}
+                                {% if 'fos_user_security_logout'|routeExists %}
+                                    {% set logoutRouting = url('fos_user_security_logout') %}
+                                {% endif %}
+                                {% if is not null logoutRouting %}
+                                    <li class="dropdown-item">
+                                        <a href="{{ logoutRouting }}">{{ 'adminmenu.profile.logout'|trans }}</a>
+                                    </li>
+                                {% endif %}
                             </ul>
                         {% endblock top_dropdown %}
                     </li>
