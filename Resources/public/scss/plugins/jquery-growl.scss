@@ -6,26 +6,26 @@
   z-index: 50000;
   position: fixed; }
   #growls.default {
-    top: $navbar-height;
+    top: $grid-gutter-width;
     right: 10px; }
   #growls.tl {
-    top: $navbar-height;
+    top: $grid-gutter-width;
     left: 10px; }
   #growls.tr {
-    top: $navbar-height;
+    top: $grid-gutter-width;
     right: 10px; }
   #growls.bl {
-    bottom: $navbar-height;
+    bottom: $grid-gutter-width;
     left: 10px; }
   #growls.br {
-    bottom: $navbar-height;
+    bottom: $grid-gutter-width;
     right: 10px; }
   #growls.tc {
-    top: $navbar-height;
+    top: $grid-gutter-width;
     right: 10px;
     left: 10px; }
   #growls.bc {
-    bottom: $navbar-height;
+    bottom: $grid-gutter-width;
     right: 10px;
     left: 10px; }
   #growls.tc .growl, #growls.bc .growl {
@@ -60,16 +60,16 @@
     margin: 15px; }
   .growl.growl-default {
     color: #FFF;
-    background: $brand-info; }
+    background: theme-color("info"); }
   .growl.growl-error {
     color: #FFF;
-    background: $brand-danger; }
+    background: theme-color("danger"); }
   .growl.growl-notice {
     color: #FFF;
-    background: $brand-success; }
+    background: theme-color("success"); }
   .growl.growl-warning {
     color: #FFF;
-    background: $brand-warning; }
+    background: theme-color("warning"); }
   .growl .growl-close {
     cursor: pointer;
     float: right;

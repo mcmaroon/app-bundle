@@ -58,18 +58,20 @@ assetic:
                 - '@AppAppBundle/Resources/public/js/jquery/jquery-ui.min.js'
         bootstrap_js:
             inputs:
-                - '@AppAppBundle/Resources/public/js/bootstrap/transition.js'
-                - '@AppAppBundle/Resources/public/js/bootstrap/alert.js'
-                - '@AppAppBundle/Resources/public/js/bootstrap/modal.js'
-                - '@AppAppBundle/Resources/public/js/bootstrap/dropdown.js'
-                - '@AppAppBundle/Resources/public/js/bootstrap/scrollspy.js'
-                - '@AppAppBundle/Resources/public/js/bootstrap/tab.js'
-                - '@AppAppBundle/Resources/public/js/bootstrap/tooltip.js'
-                - '@AppAppBundle/Resources/public/js/bootstrap/popover.js'
-                - '@AppAppBundle/Resources/public/js/bootstrap/button.js'
-                - '@AppAppBundle/Resources/public/js/bootstrap/collapse.js'
-                - '@AppAppBundle/Resources/public/js/bootstrap/carousel.js'
-                - '@AppAppBundle/Resources/public/js/bootstrap/affix.js'
+                - '@AppAppBundle/Resources/public/js/bootstrap4/vendor/popper.min.js'
+                - '@AppAppBundle/Resources/public/js/bootstrap4/util.js'
+                - '@AppAppBundle/Resources/public/js/bootstrap4/alert.js'
+                - '@AppAppBundle/Resources/public/js/bootstrap4/button.js'
+                - '@AppAppBundle/Resources/public/js/bootstrap4/carousel.js'
+                - '@AppAppBundle/Resources/public/js/bootstrap4/collapse.js'
+                - '@AppAppBundle/Resources/public/js/bootstrap4/dropdown.js'                
+                - '@AppAppBundle/Resources/public/js/bootstrap4/modal.js'                
+                - '@AppAppBundle/Resources/public/js/bootstrap4/scrollspy.js'                
+                - '@AppAppBundle/Resources/public/js/bootstrap4/tab.js'
+                - '@AppAppBundle/Resources/public/js/bootstrap4/tooltip.js'
+                - '@AppAppBundle/Resources/public/js/bootstrap4/popover.js'                
+                #- '@AppAppBundle/Resources/public/js/bootstrap4/bootstrap.min.js'                
+                
         plugin_js:
             inputs:
                 - '@AppAppBundle/Resources/public/js/plugin/jquery.growl.js'

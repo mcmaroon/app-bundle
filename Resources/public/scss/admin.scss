@@ -1,22 +1,58 @@
-// override variables only admin
-$icon-font-path:          "../css/fonts/";
-$font-size-base:          11px;
-$font-size-large:         ceil(($font-size-base * 0.85));
-$font-size-small:         ceil(($font-size-base * 0.65));
-$font-size-h1:            floor(($font-size-base * 2.15));
-$font-size-h2:            floor(($font-size-base * 1.7));
-$font-size-h3:            ceil(($font-size-base * 1.25));
-$font-size-h4:            $font-size-base;
-$font-size-h5:            ceil(($font-size-base * 0.85));
-$font-size-h6:            ceil(($font-size-base * 0.65));
-$padding-small-vertical:  2px;
-$navbar-height: 28px;
+@import "bootstrap4/functions";
+@import "bootstrap4/variables";
 
-@import "bootstrap/_bootstrap";
+// override bootstrap variables
+$grid-columns: 24;
+$link-color: theme-color("dark");
+$link-hover-color: darken($link-color, 15%);
+
+$font-size-base: .68rem;
+$font-size-lg:   1rem;
+$font-size-sm:   .675rem;
+
+$h1-font-size: 1.5rem;
+$h2-font-size: 1.2rem;
+$h3-font-size: 1rem;
+$h4-font-size: .8rem;
+$h5-font-size: .7rem;
+$h6-font-size: .65rem;
+
+@import "bootstrap4/mixins";
+@import "bootstrap4/print";
+@import "bootstrap4/reboot";
+@import "bootstrap4/type";
+@import "bootstrap4/images";
+@import "bootstrap4/code";
+@import "bootstrap4/grid";
+@import "bootstrap4/tables";
+@import "bootstrap4/forms";
+@import "bootstrap4/buttons";
+@import "bootstrap4/transitions";
+@import "bootstrap4/dropdown";
+@import "bootstrap4/button-group";
+@import "bootstrap4/input-group";
+@import "bootstrap4/custom-forms";
+@import "bootstrap4/nav";
+@import "bootstrap4/navbar";
+@import "bootstrap4/card";
+@import "bootstrap4/breadcrumb";
+@import "bootstrap4/pagination";
+@import "bootstrap4/badge";
+@import "bootstrap4/jumbotron";
+@import "bootstrap4/alert";
+@import "bootstrap4/progress";
+@import "bootstrap4/media";
+@import "bootstrap4/list-group";
+@import "bootstrap4/close";
+@import "bootstrap4/modal";
+@import "bootstrap4/tooltip";
+@import "bootstrap4/popover";
+@import "bootstrap4/carousel";
+@import "bootstrap4/utilities";
 
 // font-awesome override
 $fa-font-path:        "../css/fonts";
-$fa-inverse: $brand-info;
+$fa-inverse: theme-color("info");
 @import 'font-awesome/font-awesome';
 @import 'jquery-ui/jquery-ui';
 @import 'jquery-ui/jquery-ui.structure.min.scss';

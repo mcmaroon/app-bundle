@@ -3,7 +3,7 @@ global:
     submit: Zapisz
     submitAndStay: Zapisz i zostań
     change: Zmień
-    back: Powrót do listy
+    back: Powrót
     remove: Usuń
     edit: Edytuj
     prev: Podgląd

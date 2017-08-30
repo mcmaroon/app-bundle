@@ -29,7 +29,7 @@
         <div class="file-upload-wrapper">
             <div class="file-upload-wrapper-content">
                 {% if entity.getWebPath is not null %}
-                    <img class="img-responsive" src="{{ entity.getWebPath | imagine_filter('thumb_admin_default') }}" alt="">  
+                    <img class="img-responsive img-fluid" src="{{ entity.getWebPath | imagine_filter('thumb_admin_default') }}" alt="">  
                 {% endif %}
             </div>
             <div class="file-upload-wrapper-form">
@@ -91,10 +91,10 @@
                     data-id="{{ child.getId() }}"
                     data-parent-id="{#{% if child.getParent() is defined and child.getParent() is not null %}{{ child.getParent().getId() }}{% else %}0{% endif %}#}"
                     data-neighbor-id="{% if loop.first %}0{% else %}{% if children[childId][key - 1] is defined %}{{ children[childId][key - 1].getId() }}{% else %}0{% endif %}{% endif %}">
-                    <table class="table table-tree-list {% if child.getActive() %}bg-success{% else %}bg-warning{% endif %}">
+                    <table class="table table-tree-list {% if child.getActive() %}table-light{% else %}table-warning{% endif %}">
                         <tr>
                             <td class="id">
-                                <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+                                <span class="fa fa-arrows" aria-hidden="true"></span>
                             </td>
                             <td class="name">
                                 {{ child|default('...') }}

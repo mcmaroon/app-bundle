@@ -3,11 +3,7 @@
     {% import _self as filtersMacro %}
 
     {{ filtersMacro.wrapperPrefix(null, null, null, null, 'bulkall') }}
-    <div class="btn-group-vertical" role="group">
-        <button type="submit" name="filter" class="btn btn-sm btn-default">{{ ('filters.filter')|trans }}</button>
-        <button type="submit" name="reset" class="btn btn-sm {% if filters is defined and filters|length %}btn-warning{% else %}btn-default{% endif %}">{{ ('filters.reset')|trans }}</button>
-        <button type="button" class="form-bulk-all btn btn-sm btn-default">{{ ('filters.bulkall')|trans }}</button>
-    </div>
+    <button type="button" class="form-bulk-all btn btn-sm btn-light"><i class="fa fa-check-square-o"></i></button>
     {{ filtersMacro.wrapperSuffix() }}
 
 {% endmacro %}
@@ -39,14 +35,8 @@
 
     {{ filtersMacro.wrapperPrefix(name, transname, filters, pagination, 'double') }}
 
-    <div class="row">
-        <div class="col-xs-24">
-            {{ filtersMacro.input((name~'_min'), filters, null, class) }}
-        </div>
-        <div class="col-xs-24">
-            {{ filtersMacro.input((name~'_max'), filters, null, class) }}
-        </div>
-    </div>
+    {{ filtersMacro.input((name~'_min'), filters, null, class) }}
+    {{ filtersMacro.input((name~'_max'), filters, null, class) }}
 
     {{ filtersMacro.wrapperSuffix() }}
 
@@ -76,25 +66,25 @@
     data-filter-wrapper-name="{{ name }}"
     data-filter-wrapper-type="{{ type|default(name) }}"    
     >       
-<div
-    {% if not(('filters.'~transname|default(name)~'.help') == ('filters.'~transname|default(name)~'.help')|trans) %}
-        data-toggle="tooltip" 
-        data-placement="bottom"
-        title="{{ ('filters.'~transname|default(name)~'.help')|trans }}"        
-    {% endif %}
-    >
-
-    {% if pagination is defined and pagination is not null %}
-        {{ knp_pagination_sortable(pagination, ('filters.'~transname|default(name)~'.label')|trans, name) }}
-    {% else %}
-        {% if transname|default(name) is not null %}
-            {{ ('filters.'~transname|default(name)~'.label')|trans }}
+    <div
+        {% if not(('filters.'~transname|default(name)~'.help') == ('filters.'~transname|default(name)~'.help')|trans) %}
+            data-toggle="tooltip" 
+            data-placement="bottom"
+            title="{{ ('filters.'~transname|default(name)~'.help')|trans }}"        
         {% endif %}
-    {% endif %}
-{% endmacro %}
+        >
 
-{% macro wrapperSuffix() %}
-</div>
+        {% if pagination is defined and pagination is not null %}
+            {{ knp_pagination_sortable(pagination, ('filters.'~transname|default(name)~'.label')|trans, name) }}
+        {% else %}
+            {% if transname|default(name) is not null %}
+                {{ ('filters.'~transname|default(name)~'.label')|trans }}
+            {% endif %}
+        {% endif %}
+    {% endmacro %}
+
+    {% macro wrapperSuffix() %}
+    </div>
 </th>
 {% endmacro %}
 

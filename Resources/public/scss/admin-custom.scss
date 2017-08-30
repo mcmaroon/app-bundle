@@ -1,102 +1,59 @@
-.navbar-admin {
-    li {
-        &.current_ancestor, &.current {
-            background-color: $brand-info;
-            > a {
-                color: $body-bg;
-                font-weight: bold;
-                &:hover, &:active, &:focus {
-                    color: $body-bg;
-                    background-color: darken($brand-info, 10%);
-                }
-            }
-            &:hover, &:active, &:focus {
-                background-color: darken($brand-info, 10%);
-            }
-        }
-    }
-}
-
-.tooltip {
-    font-size: $font-size-h4;
-    .tooltip-inner {
-        color: $tooltip-color;
-        background-color: $tooltip-bg;
-    }
+body {
+    padding-top: ($spacer * 4);
+    padding-bottom: ($spacer * 4);
 }
 
 .fa {
     &.fa-success {
-        color: $brand-success;
+        color: theme-color("success");
+    }
+    &.fa-warning {
+        color: theme-color("warning");
     }
     &.fa-danger {
-        color: $brand-danger;
+        color: theme-color("danger");
     }
     &.fa-info {
-        color: $brand-info;
+        color: theme-color("info");
     }
-}
-
-#container {
-    padding-top: $navbar-height;
-    padding-bottom: ($navbar-height * 4);
 }
 
 .form-buttons-wrapper {
-    margin: $padding-base-vertical 0;
+    @extend .btn-group;
+    @extend .btn-group-sm;
     body.fixed & {
         position: fixed;
-        z-index: $zindex-navbar;
-        top: ($navbar-height + 5);
-    }
-    .form-buttons-wrapper-content {
-        position: relative;
-        body.fixed & {
-            padding: $padding-small-vertical $padding-small-horizontal;
-            border-radius: $border-radius-base;
-        }
-        > * {
-            display: inline-block;
-        }
-        .form-group {
-            margin-bottom: 0;
-        }
+        z-index: $zindex-tooltip;
+        top: ($spacer * 4);
+        left: $card-deck-margin;
     }
 }
 
 .floatThead-container {
-    overflow: visible !important;
-}
-
-table {
-    &.floatThead-table {
+    .floatThead-table {
         background-color: $body-bg;
     }
-    tr {
-        td {
-            white-space: nowrap;
-        }
-    }
+}
+
+table.table-index {    
     .filter-wrapper {
-        min-width: 50px;
         a {
             text-transform: uppercase;
-            &:after {
-                @extend .fa;            
-                padding: $padding-xs-vertical $padding-xs-horizontal;
+            &:before {
+                @extend .fa;
+                @extend .px-1;
             }
-        }        
-        .form-control {
-            padding: $padding-small-vertical;
         }
-        &[data-filter-wrapper-type="simple"] a:after {
+        .form-control {
+            @extend .px-1;
+            padding-top: 1px;
+            padding-bottom: 1px;
+        }
+        &[data-filter-wrapper-type="simple"] a:before {
             content: $fa-var-sort;
         }
-        &[data-filter-wrapper-type="double"] a:after {
+        &[data-filter-wrapper-type="double"] a:before {
             content: $fa-var-calendar;
-        }
-        &[data-filter-wrapper-type="bulkall"] {
-            min-width: 110px;
         }
     }
 }
@@ -116,7 +73,7 @@ table {
     .tree-leaf {
         background-color: transparent;
         border: none;
-        margin: $padding-small-vertical 0;
+        @extend .mx-1;
     }
     .table-tree-list {
         margin: 0;
@@ -138,58 +95,57 @@ table {
     .nav {
         > li {
             > a {
-                padding: $padding-small-vertical $padding-small-horizontal;
+                @extend .px-1
             }
         }
-    }    
+    }
 }
 
 #form-stat {
     #form-stat-checkboxes {
         max-height: 288px;
         overflow-y: scroll;
-        margin: $padding-base-vertical 0;
+        margin: $nav-link-padding-y 0;
         label {
-            @include user-select(none);
+            user-select: none;
         }
     }
 }
 #stat {
     width: 100%;
-    min-height: 400px;    
+    min-height: 400px;
     &.preloader {
         @extend .preloader;
     }
 }
 
 .preloader {
-    padding-top: $padding-base-vertical;
+    padding-top: $nav-link-padding-y;
     background: transparent url("../css/images/preloader.gif") no-repeat scroll 55% 0%;
 }
 
 .map-sync {
     &.map-sync-active {
         td {
-            background-color: $brand-info !important;
+            background-color: theme-color("info") !important;
         }
     }
 }
 
 .preview {
     cursor: help;
-    padding: $padding-small-vertical $padding-small-horizontal;
+    @extend .px-1;
 }
 
 .file-upload-wrapper {
-    @extend .well;
-    @extend .well-sm;
+    @extend .card;
+    @extend .bg-light;
     img {
         margin: 0 auto;
     }
     .file-upload-wrapper-form {
-        margin-top: $padding-base-vertical;
-        padding: $padding-large-vertical $padding-large-horizontal;
-        background-color: $brand-info;
+        margin-top: $nav-link-padding-y;
+        @extend .p-2;
     }
 }
 

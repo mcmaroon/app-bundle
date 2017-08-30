@@ -57,7 +57,7 @@
     if (typeof $().floatThead === 'function') {
         if ($('.table.table').length) {
             $('table.table').floatThead({
-                scrollingTop: 30
+                zIndex: 1031
             });
         }
     }
