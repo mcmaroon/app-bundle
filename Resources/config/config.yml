@@ -42,8 +42,8 @@ cache_adapter:
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
-    use_controller: false
-    bundles:        "%bundles%"
+    use_controller: "%kernel.debug%"
+    #bundles:        "%bundles%"
     #java: /usr/bin/java
     filters:
         cssrewrite: ~

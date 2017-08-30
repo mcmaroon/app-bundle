@@ -53,6 +53,10 @@ table.table-index {
             padding-top: 1px;
             padding-bottom: 1px;
         }
+        @extend .px-1;
+        &[data-filter-wrapper-type="bulkall"] {
+            max-width: 50px;
+        }
         &[data-filter-wrapper-type="simple"] a:before {
             content: $fa-var-sort;
         }

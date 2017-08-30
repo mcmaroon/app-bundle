@@ -3,7 +3,7 @@ parameters:
     ffmpeg_path: "%kernel.root_dir%/../vendor/mcmaroon/app-bundle/Lib/ffmpeg_win/bin/ffmpeg.exe"
     
 assetic:
-    use_controller: true
+    use_controller: "%kernel.debug%"
     assets:        
         admin_css_map:
             inputs: '@AppAppBundle/Resources/public/css/admin.css.map'

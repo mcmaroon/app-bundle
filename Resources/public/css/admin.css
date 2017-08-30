@@ -2836,7 +2836,7 @@ tbody.collapse.show {
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
   margin-right: 1rem;
-  font-size: 1.25rem;
+  font-size: 0.68rem;
   line-height: inherit;
   white-space: nowrap; }
   .navbar-brand:focus, .navbar-brand:hover {
@@ -5224,7 +5224,7 @@ a.bg-dark:focus, a.bg-dark:hover {
 .pl-1 {
   padding-left: 0.25rem !important; }
 
-.px-1, table.table-index .filter-wrapper a:before, table.table-index .filter-wrapper .form-control, .tree-list .nav > li > a, .preview {
+.px-1, table.table-index .filter-wrapper a:before, table.table-index .filter-wrapper .form-control, table.table-index .filter-wrapper, .tree-list .nav > li > a, .preview {
   padding-right: 0.25rem !important;
   padding-left: 0.25rem !important; }
 
@@ -13879,6 +13879,8 @@ table.table-index .filter-wrapper a {
 table.table-index .filter-wrapper .form-control {
   padding-top: 1px;
   padding-bottom: 1px; }
+table.table-index .filter-wrapper[data-filter-wrapper-type="bulkall"] {
+  max-width: 50px; }
 table.table-index .filter-wrapper[data-filter-wrapper-type="simple"] a:before {
   content: ""; }
 table.table-index .filter-wrapper[data-filter-wrapper-type="double"] a:before {
