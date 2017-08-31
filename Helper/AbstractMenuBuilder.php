@@ -84,7 +84,7 @@ class AbstractMenuBuilder
     {
         $routeName = $childrens[0];
         if ($this->hasRouteExists($routeName)) {
-            $el = $menu->addChild('menu.' . $routeName, array('route' => $routeName));
+            $el = $menu->addChild('menu.' . $routeName . '.default', array('route' => $routeName));
             $el->setAttributes($this->mergeAttributes($attributes));
             $el->setLinkAttributes($this->mergeLinkAttributes($linkAttributes));
             if (\count($childrens)) {
@@ -103,14 +103,15 @@ class AbstractMenuBuilder
             $totalRouteCount = 0;
             foreach ($childrens as $key => $route) {
                 $routeCount = 0;
-                foreach (['index', 'tree', 'new'] as $routeSuffix) {
+                foreach (['index' => ['icon' => 'fa-list'], 'tree' => ['icon' => 'fa-arrows'], 'new' => ['icon' => 'fa-pencil']] as $routeSuffix => $typeAttributes) {
                     $routeName = $route . '_' . $routeSuffix;
                     $fullLabel = 'menu.' . $route . '.' . $routeSuffix;
                     if ($this->hasRouteExists($routeName)) {
                         $routeCount++;
-                        $menu['menu.' . $parentRouting]->addChild($fullLabel, [
+
+                        $menu['menu.' . $parentRouting . '.default']->addChild($fullLabel, [
                             'route' => $routeName
-                        ])->setAttribute('class', 'nav-item')->setLinkAttribute('class', 'nav-link');
+                        ])->setAttributes($this->mergeAttributes(\array_merge($typeAttributes, ['icon-direction' => 'left'])))->setLinkAttribute('class', 'nav-link');
                     }
                 }
                 $totalRouteCount = $totalRouteCount + $routeCount;
@@ -118,11 +119,11 @@ class AbstractMenuBuilder
                     $hasLast = true;
                 }
                 if ($routeCount > 1 && !$hasLast) {
-                    $menu['menu.' . $parentRouting]->addChild($fullLabel . '.divider')->setAttributes(['class' => 'dropdown-divider']);
+                    $menu['menu.' . $parentRouting . '.default']->addChild($fullLabel . '.divider')->setAttributes(['class' => 'dropdown-divider']);
                 }
             }
             if ($totalRouteCount > 1) {
-                $el = $menu['menu.' . $parentRouting];
+                $el = $menu['menu.' . $parentRouting . '.default'];
                 $el->setAttributes($this->mergeAttributes(\array_merge(['class' => 'dropdown'], $attributes)));
                 $el->setLinkAttributes($this->mergeLinkAttributes(\array_merge(['class' => 'dropdown-toggle', 'data-toggle' => 'dropdown'], $linkAttributes)));
                 $el->setChildrenAttributes(['class' => 'dropdown-menu']);
