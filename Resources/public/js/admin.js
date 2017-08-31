@@ -21,7 +21,7 @@
     if (typeof APP.preview === 'function') {
         new APP.preview('.preview', {}).init();
     }
-    
+
     if (typeof APP.previewSelect === 'function') {
         new APP.previewSelect('.preview-select', {}).init();
     }
@@ -31,11 +31,11 @@
             url: APP.settings.paths.convertprogress
         }).init();
     }
-    
+
     if (typeof APP.uploadmultiple === 'function') {
         new APP.uploadmultiple('.uploadmultiple', {});
     }
-    
+
     if (typeof $().tooltip === 'function') {
         $('[data-toggle="tooltip"]').tooltip();
     }
@@ -57,7 +57,13 @@
     if (typeof $().floatThead === 'function') {
         if ($('.table.table').length) {
             $('table.table').floatThead({
-                zIndex: 1031
+                top: function ($table) {
+                    var top = 0;
+                    if ($('body > .navbar').length === 1) {
+                        top = $('body > .navbar').innerHeight()
+                    }
+                    return top;
+                }
             });
         }
     }

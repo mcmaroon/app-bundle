@@ -1,0 +1,19 @@
+// override bootstrap variables
+$grid-columns: 24;
+$link-color: theme-color("dark");
+$link-hover-color: darken($link-color, 15%);
+
+$font-size-base: .66rem;
+$font-size-lg:   1rem;
+$font-size-sm:   .8rem;
+
+$navbar-brand-font-size: $font-size-base;
+$nav-link-padding-y: .25rem;
+$nav-link-padding-x: .5rem;
+
+$h1-font-size: 1.5rem;
+$h2-font-size: 1.2rem;
+$h3-font-size: 1rem;
+$h4-font-size: .8rem;
+$h5-font-size: .7rem;
+$h6-font-size: .65rem;

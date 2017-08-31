@@ -1,24 +1,8 @@
 @import "bootstrap4/functions";
 @import "bootstrap4/variables";
-
 // override bootstrap variables
-$grid-columns: 24;
-$link-color: theme-color("dark");
-$link-hover-color: darken($link-color, 15%);
-
-$font-size-base: .68rem;
-$font-size-lg:   1rem;
-$font-size-sm:   .675rem;
-
-$navbar-brand-font-size: $font-size-base;
-
-$h1-font-size: 1.5rem;
-$h2-font-size: 1.2rem;
-$h3-font-size: 1rem;
-$h4-font-size: .8rem;
-$h5-font-size: .7rem;
-$h6-font-size: .65rem;
-
+@import "admin-variables";
+// end override bootstrap variables
 @import "bootstrap4/mixins";
 @import "bootstrap4/print";
 @import "bootstrap4/reboot";

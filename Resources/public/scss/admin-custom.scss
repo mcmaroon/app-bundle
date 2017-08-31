@@ -5,6 +5,7 @@ body {
 
 .navbar {
     @include box-shadow($btn-box-shadow);
+    @extend .py-1;
 }
 
 .fa {
