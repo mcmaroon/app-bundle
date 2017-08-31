@@ -103,9 +103,9 @@ class AbstractMenuBuilder
             $totalRouteCount = 0;
             foreach ($childrens as $key => $route) {
                 $routeCount = 0;
-                foreach (['', 'tree', 'new'] as $routeSuffix) {
-                    $routeName = $route . (\strlen($routeSuffix) ? '_' . $routeSuffix : '');
-                    $fullLabel = 'menu.' . $route . '.' . (\strlen($routeSuffix) ? $routeSuffix : 'list');
+                foreach (['index', 'tree', 'new'] as $routeSuffix) {
+                    $routeName = $route . '_' . $routeSuffix;
+                    $fullLabel = 'menu.' . $route . '.' . $routeSuffix;
                     if ($this->hasRouteExists($routeName)) {
                         $routeCount++;
                         $menu['menu.' . $parentRouting]->addChild($fullLabel, [
