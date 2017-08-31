@@ -146,10 +146,21 @@ class AbstractMenuBuilder
 
     // ~
 
+    protected function getBundleName()
+    {
+        return '';
+    }
+
+    // ~
+
     protected function createAdminMenuBody(ItemInterface &$menu)
     {
+        if (!\strlen($this->getBundleName())) {
+            throw new \Exception('Invalid Bundle Name in AbstractMenuBuilder');
+        }
+
         $routes = [];
-        $path = $this->container->get('kernel')->locateResource('@RingTheBelleMainBundle') . DIRECTORY_SEPARATOR . 'Entity';
+        $path = $this->container->get('kernel')->locateResource($this->getBundleName()) . DIRECTORY_SEPARATOR . 'Entity';
         $finder = new Finder();
         $files = $finder->files()->in($path)->name('*.php');
         foreach ($files as $file) {
