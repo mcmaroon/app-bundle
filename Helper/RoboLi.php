@@ -192,7 +192,11 @@ abstract class RoboLi extends \Robo\Tasks
     {
         foreach ($dirs as $dir) {
             if (file_exists($dir)) {
-                $this->_cleanDir($dir);
+                try {
+                    $this->_cleanDir($dir);   
+                } catch (\Exception $exc) {
+                    $this->say($exc->getMessage());
+                }                
             }
         }
     }
