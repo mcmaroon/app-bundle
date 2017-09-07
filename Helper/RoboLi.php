@@ -10,7 +10,7 @@ abstract class RoboLi extends \Robo\Tasks
     public function appPhpInfo()
     {
         $this->_exec('php -i');
-        $this->_exec('php -v');        
+        $this->_exec('php -v');
     }
 
     public function appInstall($withComposer = true)
@@ -46,7 +46,7 @@ abstract class RoboLi extends \Robo\Tasks
 
     public function appDbUpdate()
     {
-        $this->appClean();
+        $this->appClearCache();
         $this->taskExec('php bin/console doctrine:schema:update --force --dump-sql')->run();
         $this->taskExec('php bin/console doctrine:schema:validate')->run();
     }
@@ -63,8 +63,9 @@ abstract class RoboLi extends \Robo\Tasks
     public function appClearCache()
     {
         $dirs = [
-            'var/cache', 'var/logs', 'var/tmp', 'web/media/cache',
-            'web/bundles', 'web/assetic', 'web/css', 'web/images', 'web/js'
+            'var/cache', 'var/logs', 'var/tmp',
+            'web/bundles', 'web/assetic', 'web/css', 'web/images', 'web/js', 'web/media/cache',
+            'public_html/bundles', 'public_html/assetic', 'public_html/css', 'public_html/images', 'public_html/js', 'public_html/media/cache',
         ];
         $this->cleanDirectories($dirs);
     }
@@ -82,9 +83,10 @@ abstract class RoboLi extends \Robo\Tasks
      */
     public function appClean()
     {
+        $this->appClearCache();
         $dirs = [
-            'var/cache', 'var/logs', 'var/tmp', 'web/uploads', 'web/media',
-            'web/bundles', 'web/assetic', 'web/css', 'web/images', 'web/js'
+            'web/media',
+            'public_html/media',
         ];
         $this->cleanDirectories($dirs);
     }
@@ -193,10 +195,10 @@ abstract class RoboLi extends \Robo\Tasks
         foreach ($dirs as $dir) {
             if (file_exists($dir)) {
                 try {
-                    $this->_cleanDir($dir);   
+                    $this->_cleanDir($dir);
                 } catch (\Exception $exc) {
                     $this->say($exc->getMessage());
-                }                
+                }
             }
         }
     }
