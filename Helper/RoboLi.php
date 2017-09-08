@@ -64,8 +64,8 @@ abstract class RoboLi extends \Robo\Tasks
     {
         $dirs = [
             'var/cache', 'var/logs', 'var/tmp',
-            'web/bundles', 'web/assetic', 'web/css', 'web/images', 'web/js', 'web/media/cache',
-            'public_html/bundles', 'public_html/assetic', 'public_html/css', 'public_html/images', 'public_html/js', 'public_html/media/cache',
+            'web/bundles', 'web/assetic', 'web/css', 'web/images', 'web/js',
+            'public_html/bundles', 'public_html/assetic', 'public_html/css', 'public_html/images', 'public_html/js',
         ];
         $this->cleanDirectories($dirs);
     }
