@@ -19,9 +19,21 @@ abstract class RoboLi extends \Robo\Tasks
             $this->taskComposerUpdate()->run();
         }
         $this->appDbUpdate();
-        $this->_exec('git checkout bin/symfony_requirements');
-        $this->_exec('git checkout var/SymfonyRequirements.php');
-        $this->_exec('git checkout web/config.php');
+
+        $checkouts = [
+            'bin/symfony_requirements',
+            'bin/symfony_requirements',
+            'var/SymfonyRequirements.php',
+            'web/config.php',
+            'composer.lock'
+        ];
+
+        foreach ($checkouts as $checkout) {
+            if (\file_exists($dir)) {
+                $this->_exec('git checkout ' . $checkout);
+            }
+        }
+
         $this->_exec('git status');
     }
 
