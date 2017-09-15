@@ -22,7 +22,6 @@ abstract class RoboLi extends \Robo\Tasks
 
         $checkouts = [
             'bin/symfony_requirements',
-            'bin/symfony_requirements',
             'var/SymfonyRequirements.php',
             'web/config.php',
             'composer.lock'
