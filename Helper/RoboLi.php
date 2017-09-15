@@ -28,7 +28,7 @@ abstract class RoboLi extends \Robo\Tasks
         ];
 
         foreach ($checkouts as $checkout) {
-            if (\file_exists($dir)) {
+            if (\file_exists($checkout)) {
                 $this->_exec('git checkout ' . $checkout);
             }
         }
