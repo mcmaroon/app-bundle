@@ -15,6 +15,7 @@ class AppEntityEvent extends Event
     const EVENT_CREATE = 'app.entity.create';
     const EVENT_UPDATE = 'app.entity.update';
     const EVENT_DELETE = 'app.entity.delete';
+    const EVENT_HELPER_SORT = 'app.helper.sort';
 
     public function __construct($entity = null, Request $request = null, array $additionalInfo = [])
     {

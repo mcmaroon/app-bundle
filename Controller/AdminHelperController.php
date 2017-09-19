@@ -4,6 +4,7 @@ namespace App\AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\AppBundle\Event\AppEntityEvent;
 
 /**
  * AdminHelperController
@@ -63,6 +64,11 @@ class AdminHelperController extends Controller
     public function sortAction($entityNamespace, Request $request)
     {
 
+        $repository = null;
+        $items = [];
+
+        $renderData = array('status' => false);
+
         $em = $this->getDoctrine()->getManager();
 
         try {
@@ -75,8 +81,6 @@ class AdminHelperController extends Controller
         }
 
         $ids = $request->request->get('ids', array());
-
-        $renderData = array('status' => false);
 
         $updateItemsCount = 0;
 
@@ -96,6 +100,14 @@ class AdminHelperController extends Controller
         $renderData['count'] = $updateItemsCount;
 
         $em->flush();
+
+        $appEntityEvent = new AppEntityEvent(null, $request, [
+            'helper' => 'sortAction',
+            'repository' => $repository,
+            'items' => $items,
+            'renderData' => $renderData
+        ]);
+        $this->get('event_dispatcher')->dispatch(AppEntityEvent::EVENT_HELPER_SORT, $appEntityEvent);
 
         return new JsonResponse($renderData);
     }
