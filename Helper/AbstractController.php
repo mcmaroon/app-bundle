@@ -177,6 +177,7 @@ abstract class AbstractController extends Controller implements AbstractControll
     // ~
 
     public function updateAction(Request $request, $id) {
+        $redirectUrl = $request->get('redirectUrl');
         $translated = $this->get('translator');
         $em = $this->getDoctrine()->getManager();
         $em->getFilters()->disable('softdeleteable');
@@ -203,11 +204,23 @@ abstract class AbstractController extends Controller implements AbstractControll
             } catch (\Exception $e) {                
                 $this->addFlash('danger', $translated->trans('global.messages.update.error'));               
             }                                    
+            
             if ($form->get('submitAndStay')->isClicked() || is_string($request->get('submitAndStay'))) {
-                return $this->redirect($this->generateUrl(strtolower($this->entityName) . '_edit', array('id' => $id)));
+                return $this->redirect($this->generateUrl(strtolower($this->entityName) . '_edit', array('id' => $id, 'redirectUrl' => $redirectUrl)));
             }
 
-            return $this->redirect($this->generateUrl(strtolower($this->entityName)));
+            try {
+                return $this->redirect($this->generateUrl(strtolower($this->entityName)));
+            } catch (\Exception $exc) {
+                
+            }
+
+            try {
+                return $this->redirect($redirectUrl);
+            } catch (\Exception $exc) {
+                
+            }
+            
         }
 
         return $this->render($this->getViewPath() . ':edit.html.twig', array(
@@ -276,8 +289,16 @@ abstract class AbstractController extends Controller implements AbstractControll
 
     protected function createEditForm($entity) {
 
+        $request = $this->container->get('request_stack')->getCurrentRequest();
+        $redirectUrl = $request->get('redirectUrl');
+        $params = [
+            'id' => $entity->getId()
+        ];
+        if($redirectUrl && \strlen($redirectUrl)){
+            $params['redirectUrl'] = $redirectUrl;
+        }
         $form = $this->createForm($this->getControllerFormType(), $entity, array(
-            'action' => $this->generateUrl(strtolower($this->entityName) . '_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl(strtolower($this->entityName) . '_update', $params),
             'method' => 'PUT',
         ));
 
