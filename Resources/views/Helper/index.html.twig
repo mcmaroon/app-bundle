@@ -4,10 +4,18 @@
 
 {% block body %}
 
+    {% set defaultRoutingEntryName = null %}
+
     {% if classShortName is defined %}
         <h1>{{ ('adminmenu.'~classShortName~'.list')|trans }}
             <span class="badge badge-dark">{{ pagination.getTotalItemCount }}</span>
         </h1>
+        {% if (classShortName~'_show')|routeExists %}
+            {% set defaultRoutingEntryName = (classShortName~'_show') %}
+        {% endif %}
+        {% if (classShortName~'_edit')|routeExists %}
+            {% set defaultRoutingEntryName = (classShortName~'_edit') %}
+        {% endif %}
     {% endif %}
 
     {% block indexbeforeform %}
@@ -62,9 +70,9 @@
 
                             {% block indexrowstop %}
                                 <td>{{ filterMacros.bulkView(entity.id) }}</td>
-                                <td>{% if classShortName is defined %}<a href="{{ path(classShortName~'_edit', {'id': entity.id} ) }}">{% endif %}{{ entity.id }}{% if classShortName is defined %}</a>{% endif %}</td>
-                                <td>{% if classShortName is defined %}<a href="{{ path(classShortName~'_edit', {'id': entity.id} ) }}">{% endif %}{{ entity.obj|default('.........') }}{% if classShortName is defined %}</a>{% endif %}</td>
-                                {% endblock indexrowstop %}
+                                <td>{% if defaultRoutingEntryName %}<a href="{{ path(defaultRoutingEntryName, {'id': entity.id} ) }}">{% endif %}{{ entity.id }}{% if defaultRoutingEntryName %}</a>{% endif %}</td>
+                                <td>{% if defaultRoutingEntryName %}<a href="{{ path(defaultRoutingEntryName, {'id': entity.id} ) }}">{% endif %}{{ entity.obj|default('.........') }}{% if defaultRoutingEntryName %}</a>{% endif %}</td>
+                            {% endblock indexrowstop %}
 
                             {% block indexrowsmiddle %}
                             {% endblock indexrowsmiddle %}
