@@ -201,8 +201,8 @@ abstract class AbstractController extends Controller implements AbstractControll
                 $this->updateActionVars($request, $id);
                 
                 $this->addFlash('success', $translated->trans('global.messages.update.success'));
-            } catch (\Exception $e) {                
-                $this->addFlash('danger', $translated->trans('global.messages.update.error'));               
+            } catch (\Exception $e) {
+                $this->addFlash('danger', $translated->trans('global.messages.update.error') . ' - ' . $e->getMessage());
             }                                    
             
             if ($form->get('submitAndStay')->isClicked() || is_string($request->get('submitAndStay'))) {
