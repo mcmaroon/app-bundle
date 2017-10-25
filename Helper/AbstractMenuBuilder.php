@@ -11,14 +11,24 @@ class AbstractMenuBuilder
 {
 
     protected $securityContext;
-    protected $isLoggedIn;
+    protected $isLoggedIn = false;
     protected $factory;
     protected $container;
 
     public function __construct(AuthorizationCheckerInterface $securityContext, $container, FactoryInterface $factory)
     {
         $this->securityContext = $securityContext;
-        $this->isLoggedIn = $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY');
+
+        try {
+            $this->isLoggedIn = $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY');
+        } catch (\Exception $exc) {
+//            $log = $container->get('app.log');
+//            $log->error('AbstractMenuBuilder:securityContext', [
+//                'code' => $exc->getCode(),
+//                'message' => $exc->getMessage()
+//            ]);
+        }
+
         $this->factory = $factory;
         $this->container = $container;
     }
