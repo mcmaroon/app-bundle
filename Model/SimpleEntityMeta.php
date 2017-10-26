@@ -1,5 +1,4 @@
 <?php
-
 namespace App\AppBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -9,7 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\MappedSuperclass
  * @ORM\HasLifecycleCallbacks
  */
-abstract class SimpleEntityMeta {   
+abstract class SimpleEntityMeta
+{
 
     /**
      * @ORM\Column(name="created_at", type="datetime")
@@ -21,7 +21,7 @@ abstract class SimpleEntityMeta {
      * @ORM\Column(name="edited_at", type="datetime")
      * @var \DateTime
      */
-    protected $editedAt;   
+    protected $editedAt;
 
     /**
      * Set createdAt
@@ -31,11 +31,10 @@ abstract class SimpleEntityMeta {
      */
     public function setCreatedAt($date = null)
     {
+        $this->createdAt = new \DateTime("now");
+
         if ($date instanceof \DateTime) {
             $this->createdAt = $date;
-        }
-        if (is_null($this->createdAt)) {
-            $this->createdAt = new \DateTime("now");
         }
 
         return $this;
@@ -46,7 +45,8 @@ abstract class SimpleEntityMeta {
      *
      * @return \DateTime
      */
-    public function getCreatedAt() {
+    public function getCreatedAt()
+    {
         return $this->createdAt;
     }
 
@@ -59,11 +59,10 @@ abstract class SimpleEntityMeta {
      */
     public function setEditedAt($date = null)
     {
+        $this->editedAt = new \DateTime("now");
+
         if ($date instanceof \DateTime) {
             $this->editedAt = $date;
-        }
-        if (is_null($this->editedAt)) {
-            $this->editedAt = new \DateTime("now");
         }
 
         return $this;
@@ -74,10 +73,10 @@ abstract class SimpleEntityMeta {
      *
      * @return \DateTime
      */
-    public function getEditedAt() {
+    public function getEditedAt()
+    {
         return $this->editedAt;
     }
-
 }
 
 ?>
