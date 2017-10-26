@@ -47,12 +47,14 @@ abstract class RoboLi extends \Robo\Tasks
         $this->taskComposerUpdate()->run();
         $this->appUninstall();
         $this->appInstall(false);
+        $this->appTest();
     }
 
     public function appReload()
     {
         $this->appUninstall();
         $this->appInstall(false);
+        $this->appTest();
     }
 
     public function appDbUpdate()
