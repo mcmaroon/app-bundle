@@ -361,6 +361,16 @@ abstract class AbstractController extends Controller implements AbstractControll
         }
 
         if ($request->headers->get('referer') !== null) {
+            try {
+                $referer = $request->headers->get('referer');
+                $refererArray = [];
+                \parse_str(\parse_url($referer, PHP_URL_QUERY), $refererArray);
+                if (is_array($refererArray) && isset($refererArray['redirectUrl'])) {
+                    return new RedirectResponse($refererArray['redirectUrl']);
+                }
+            } catch (\Exception $exc) {
+                
+            }
             //return new RedirectResponse($request->headers->get('referer'));
         }
 
