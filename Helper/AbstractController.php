@@ -148,6 +148,8 @@ abstract class AbstractController extends Controller implements AbstractControll
     }
 
     public function editAction($id) {
+        $request = $this->container->get('request_stack')->getCurrentRequest();
+        $redirectUrl = $request->get('redirectUrl');
         $em = $this->getDoctrine()->getManager();
         $em->getFilters()->disable('softdeleteable');
 
@@ -160,6 +162,7 @@ abstract class AbstractController extends Controller implements AbstractControll
         $form = $this->createEditForm($entity);
 
         return $this->render($this->getViewPath() . ':edit.html.twig', array(
+                    'redirectUrl' => $redirectUrl,
                     'classShortName' => strtolower($this->entityName),
                     'classShortNameSpace' => $this->entityName,
                     'entity' => $entity,
@@ -302,7 +305,13 @@ abstract class AbstractController extends Controller implements AbstractControll
             'method' => 'PUT',
         ));
 
-        $form->add('submit', SubmitType::class, array('label' => 'global.submit'));
+        try {
+            $this->generateUrl(strtolower($this->entityName));
+            $form->add('submit', SubmitType::class, array('label' => 'global.submit'));
+        } catch (\Exception $exc) {
+            
+        }
+
         $form->add('submitAndStay', SubmitType::class, array('label' => 'global.submitAndStay'));
 
         return $form;

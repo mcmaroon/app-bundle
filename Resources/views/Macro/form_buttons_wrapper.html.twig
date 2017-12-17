@@ -1,11 +1,17 @@
 <div class="form-buttons-wrapper" role="group">
-    {{ form_widget(form.submit) }}
+    {% if form.submit is defined %}
+        {{ form_widget(form.submit) }}
+    {% endif %}
     {% if form.submitAndStay is defined  %}
         {{ form_widget(form.submitAndStay) }}
     {% endif %}
     {% if routing|lower|routeExists %}
         <a class="btn btn-light" href="{{ path(routing|lower) }}">{{ 'global.back'|trans }}</a>
-    {% endif %}        
+    {% else %}
+        {% if redirectUrl is defined %}
+            <a class="btn btn-light" href="{{ redirectUrl }}">{{ 'global.back'|trans }}</a>
+        {% endif %} 
+    {% endif %}                   
     {% if routing|lower~'_delete'|routeExists and entity.id is not null %}            
         <a class="btn btn-danger" href="{{ path(routing|lower~'_delete', {'id': entity.id} ) }}">{{ 'global.remove'|trans }}</a>
     {% endif %}
