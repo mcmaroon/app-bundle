@@ -14,7 +14,7 @@
         "fabpot/goutte": "v3.2.1",
         "twig/extensions": "1.5",
         "gregwar/captcha-bundle": "2.0.3",
-        "liip/imagine-bundle": "1.4.1",
+        "liip/imagine-bundle": "1.9.1",
         "stof/doctrine-extensions-bundle": "v1.2.2",
         "cache/cache-bundle": "^0.4.1",
         "cache/adapter-bundle": "^0.3.3",
