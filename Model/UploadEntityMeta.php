@@ -26,7 +26,6 @@ abstract class UploadEntityMeta extends SimpleActiveEntityMeta implements Upload
 
     /**
      * @Assert\File(
-     *      maxSize="6000000",
      *      mimeTypes = {
      *          "image/png",
      *          "image/jpeg",
