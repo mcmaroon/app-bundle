@@ -71,7 +71,7 @@
                             {% block indexrowstop %}
                                 <td>{{ filterMacros.bulkView(entity.id) }}</td>
                                 <td>{% if defaultRoutingEntryName %}<a href="{{ path(defaultRoutingEntryName, {'id': entity.id} ) }}">{% endif %}{{ entity.id }}{% if defaultRoutingEntryName %}</a>{% endif %}</td>
-                                <td>{% if defaultRoutingEntryName %}<a href="{{ path(defaultRoutingEntryName, {'id': entity.id} ) }}">{% endif %}{{ entity.obj|default('.........') }}{% if defaultRoutingEntryName %}</a>{% endif %}</td>
+                                <td>{% if defaultRoutingEntryName %}<a href="{{ path(defaultRoutingEntryName, {'id': entity.id} ) }}">{% endif %}{{ entity.obj|default('.........')|striptags('<br>')|raw }}{% if defaultRoutingEntryName %}</a>{% endif %}</td>
                             {% endblock indexrowstop %}
 
                             {% block indexrowsmiddle %}
