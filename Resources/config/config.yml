@@ -196,23 +196,28 @@ knp_menu:
 
 # LiipImagineBundle Configuration
 liip_imagine:
+    driver: gd
     filter_sets:
         thumb_admin_default:
+            animated: true
             quality: 75
             filters:
                 relative_resize:
                     scale: 1.0
         thumb_admin_small:
+            animated: true
             quality: 75
             filters:
                 upscale: { min: [60, 30] }
                 thumbnail: { size: [60, 30], mode: outbound }
         thumb_admin_medium:
+            animated: true
             quality: 75
             filters:
                 upscale: { min: [120, 60] }
                 thumbnail: { size: [120, 60], mode: outbound }
         thumb_admin_large:
+            animated: true
             quality: 75
             filters:
                 upscale: { min: [480, 240] }
