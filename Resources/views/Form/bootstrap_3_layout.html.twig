@@ -1,0 +1,13 @@
+{% extends "bootstrap_3_layout.html.twig" %}
+
+{% block form_row -%}
+    <div class="form-group{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
+        {% if form.vars is defined and form.vars.id is defined %}
+            {% set transname = form.vars.id~'.form.help.text' %}
+            <span class="help-text form-text text-muted {% if transname == transname|trans %}sr-only{% endif %} ">{{ transname|trans }}</span>
+        {% endif %}
+    </div>
+    {%- endblock form_row %}
