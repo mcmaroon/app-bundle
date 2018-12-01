@@ -23,11 +23,11 @@ class ParameterExtension extends \Twig_Extension {
         try {
             return $this->container->getParameter($name);
         } catch (\Exception $exc) {
-            $log = $this->container->get('app.log');
+            /*$log = $this->container->get('app.log');
             $log->error('ParameterExtension', [
                 'code' => $exc->getCode(),
                 'message' => $exc->getMessage()
-            ]);
+            ]);*/
             return null;
         }
     }

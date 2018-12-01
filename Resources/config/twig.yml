@@ -1,0 +1,3 @@
+twig:
+  paths:
+    '%kernel.project_dir%/vendor/mcmaroon/app-bundle/Resources/views': AppAppBundle
