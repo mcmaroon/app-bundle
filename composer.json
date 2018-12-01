@@ -9,7 +9,6 @@
         }
     ],
     "require": {
-        "symfony/assetic-bundle": "v2.8.1",
         "guzzlehttp/guzzle": "6.2.2",
         "fabpot/goutte": "v3.2.1",
         "twig/extensions": "1.5",
