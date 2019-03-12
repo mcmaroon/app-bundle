@@ -1,4 +1,4 @@
-{% extends "AppAppBundle::layout.html.twig" %}
+{% extends "@AppAppBundle/layout.html.twig" %}
 
 {% block title %}Admin{% endblock %}
 
@@ -69,13 +69,13 @@
 {% block body %}{% endblock %}
 
 {% block stylesheets %}
-    {% stylesheets '@admin_css' output='css/admin.css' combine=true filter='?uglifycss' %}
+{#{% stylesheets '@admin_css' output='css/admin.css' combine=true filter='?uglifycss' %}
     <link href="{{ asset_url }}" type="text/css" rel="stylesheet">
-    {% endstylesheets %}
+    {% endstylesheets %}#}
 {% endblock %}
 
 {% block javascriptsbody %}
-    {% javascripts '@jquery_js' '@bootstrap_js' '@plugin_js' '@admin_js' output='js/admin.js' combine=true filter='?uglifyjs2' %}
+{#{% javascripts '@jquery_js' '@bootstrap_js' '@plugin_js' '@admin_js' output='js/admin.js' combine=true filter='?uglifyjs2' %}
     <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    {% endjavascripts %}#}
 {% endblock %}
