@@ -10,6 +10,7 @@
     {% endblock head %}
 
     {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
     {% endblock stylesheets %}
 
     <script>
@@ -36,7 +37,7 @@
 
 {% block layoutformtheme %}
     {% if form is defined %}
-        {% form_theme form 'AppAppBundle::Form/bootstrap_3_layout.html.twig' %}
+        {% form_theme form '@AppAppBundle/Form/bootstrap_3_layout.html.twig' %}
     {% endif %}
 {% endblock layoutformtheme %}
 
@@ -47,7 +48,7 @@
     {% endblock top %}
 
     <div id="container"
-         class="{% block containerclass %}{% if is_granted('ROLE_ADMINISTRATOR') or is_granted('ROLE_SUPER_ADMIN') %}container-fluid{% else %}container{% endif %}{% endblock containerclass %}">
+         class="{% block containerclass %}container{% endblock containerclass %}">
 
         {% block beforealerts %}
         {% endblock beforealerts %}
@@ -104,6 +105,7 @@
 </div>
 
 {% block javascriptsbody %}
+    {{ encore_entry_script_tags('app') }}
 {% endblock javascriptsbody %}
 
 </body>

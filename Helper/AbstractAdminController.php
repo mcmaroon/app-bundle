@@ -21,7 +21,7 @@ abstract class AbstractAdminController extends AbstractController {
     // ~
 
     protected function getViewPath() {
-        return $this->getControllerBundleName() . ':Admin' . $this->entityName;
+        return 'admin/' . strtolower($this->entityName);
     }
 
 }

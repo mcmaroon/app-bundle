@@ -29,7 +29,7 @@ abstract class AbstractController extends Controller implements AbstractControll
     // ~
 
     protected function getViewPath() {
-        return $this->getControllerBundleName() . ':' . $this->entityName;
+        return strtolower($this->entityName);;
     }
 
     // ~
@@ -40,7 +40,7 @@ abstract class AbstractController extends Controller implements AbstractControll
 
     // ~
 
-    public function indexAction(Request $request) {
+    public function index(Request $request) {
 
         $translated = $this->get('translator');
         $em = $this->getDoctrine()->getManager();
@@ -114,7 +114,7 @@ abstract class AbstractController extends Controller implements AbstractControll
 
         // ~
 
-        return $this->render($this->getViewPath() . ':index.html.twig', array(
+        return $this->render($this->getViewPath() . '/index.html.twig', array(
                     'classShortName' => strtolower($this->entityName),
                     'entityNamespace' => $entityNamespace,
                     'pagination' => $pagination,
@@ -161,7 +161,7 @@ abstract class AbstractController extends Controller implements AbstractControll
 
         $form = $this->createEditForm($entity);
 
-        return $this->render($this->getViewPath() . ':edit.html.twig', array(
+        return $this->render($this->getViewPath() . '/edit.html.twig', array(
                     'redirectUrl' => $redirectUrl,
                     'classShortName' => strtolower($this->entityName),
                     'classShortNameSpace' => $this->entityName,

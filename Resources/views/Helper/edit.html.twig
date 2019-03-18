@@ -1,6 +1,6 @@
-{% extends "AppAppBundle::admin.html.twig" %}
+{% extends "@AppAppBundle/admin.html.twig" %}
 
-{% import 'AppAppBundle:Macro:helpers.html.twig' as helperMacros %}
+{% import '@AppAppBundle/Macro/helpers.html.twig' as helperMacros %}
 
 {% block body %}
 
@@ -17,7 +17,7 @@
 
     {% block editbuttons %}
         {% if classShortName is defined %}
-            {{ include('AppAppBundle::Macro/form_buttons_wrapper.html.twig', { 'routing': classShortName }) }}
+            {{ include('@AppAppBundle/Macro/form_buttons_wrapper.html.twig', { 'routing': classShortName }) }}
         {% endif %}
     {% endblock editbuttons %}
 
