@@ -4,6 +4,7 @@ namespace App\AppBundle\Helper;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Config\FileLocator;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 
@@ -28,6 +29,7 @@ class AbstractMenuBuilder
 //                'message' => $exc->getMessage()
 //            ]);
         }
+        $this->isLoggedIn = true;
 
         $this->factory = $factory;
         $this->container = $container;
@@ -171,7 +173,8 @@ class AbstractMenuBuilder
         }
 
         $routes = [];
-        $path = $this->container->get('kernel')->locateResource($this->getBundleName()) . DIRECTORY_SEPARATOR . 'Entity';
+        $path = $this->container->get('kernel')->getRootDir() . DIRECTORY_SEPARATOR . 'Entity';
+
         $finder = new Finder();
         $files = $finder->files()->in($path)->name('*.php');
         foreach ($files as $file) {
