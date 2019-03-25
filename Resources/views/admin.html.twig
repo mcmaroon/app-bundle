@@ -3,7 +3,7 @@
 {% block title %}Admin{% endblock %}
 
 {% block top %}
-    {#{% if is_granted('ROLE_ADMINISTRATOR') or is_granted('ROLE_SUPER_ADMIN') %}#}
+    {% if is_granted('ROLE_ADMINISTRATOR') or is_granted('ROLE_SUPER_ADMIN') %}
 
         {% set adminMenu = knp_menu_get('adminMenu') %}
 
@@ -63,7 +63,7 @@
                 </ul>
             </div>
         </nav>
-    {#{% endif %}#}
+    {% endif %}
 {% endblock top %}
 
 {% block containerclass %}container-fluid{% endblock containerclass %}
