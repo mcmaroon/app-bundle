@@ -1,10 +1,5 @@
-body {
-    padding-top: ($spacer * 4);
-    padding-bottom: ($spacer * 4);
-}
-
 .navbar {
-    @include box-shadow($btn-box-shadow);
+    //@include box-shadow($btn-box-shadow);
     @extend .py-1;
 }
 
@@ -28,15 +23,15 @@ body {
     @extend .btn-group-sm;
     body.fixed & {
         position: fixed;
-        z-index: $zindex-dropdown;
-        top: ($spacer * 4);
-        left: $card-deck-margin;
+        //z-index: $zindex-dropdown;
+        //top: ($spacer * 4);
+        //left: $card-deck-margin;
     }
 }
 
 .floatThead-container {
     .floatThead-table {
-        background-color: $body-bg;
+        //background-color: $body-bg;
     }
 }
 
@@ -59,10 +54,10 @@ table.table-index {
             max-width: 50px;
         }
         &[data-filter-wrapper-type="simple"] a:before {
-            content: $fa-var-sort;
+            //content: $fa-var-sort;
         }
         &[data-filter-wrapper-type="double"] a:before {
-            content: $fa-var-calendar;
+            //content: $fa-var-calendar;
         }
     }
 }
@@ -114,7 +109,7 @@ table.table-index {
     #form-stat-checkboxes {
         max-height: 288px;
         overflow-y: scroll;
-        margin: $nav-link-padding-y 0;
+        //margin: $nav-link-padding-y 0;
         label {
             user-select: none;
         }
@@ -124,13 +119,13 @@ table.table-index {
     width: 100%;
     min-height: 400px;
     &.preloader {
-        @extend .preloader;
+        //@extend .preloader;
     }
 }
 
 .preloader {
-    padding-top: $nav-link-padding-y;
-    background: transparent url("../css/images/preloader.gif") no-repeat scroll 55% 0%;
+    //padding-top: $nav-link-padding-y;
+    //background: transparent url("../css/images/preloader.gif") no-repeat scroll 55% 0%;
 }
 
 .map-sync {
@@ -153,7 +148,7 @@ table.table-index {
         margin: 0 auto;
     }
     .file-upload-wrapper-form {
-        margin-top: $nav-link-padding-y;
+        //margin-top: $nav-link-padding-y;
         @extend .p-2;
     }
 }
@@ -186,4 +181,14 @@ table.table-index {
 
 .ui-state-highlight {
     border: none;
+}
+
+.material-icons {
+    font-size: $font-size-base;
+}
+
+.pagination-wrapper {
+    @extend .d-flex;
+    @extend .justify-content-center;
+    @extend .p-5;
 }

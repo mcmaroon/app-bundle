@@ -1,50 +1,19 @@
-@import "bootstrap4/functions";
-@import "bootstrap4/variables";
-// override bootstrap variables
 @import "admin-variables";
-// end override bootstrap variables
-@import "bootstrap4/mixins";
-@import "bootstrap4/print";
-@import "bootstrap4/reboot";
-@import "bootstrap4/type";
-@import "bootstrap4/images";
-@import "bootstrap4/code";
-@import "bootstrap4/grid";
-@import "bootstrap4/tables";
-@import "bootstrap4/forms";
-@import "bootstrap4/buttons";
-@import "bootstrap4/transitions";
-@import "bootstrap4/dropdown";
-@import "bootstrap4/button-group";
-@import "bootstrap4/input-group";
-@import "bootstrap4/custom-forms";
-@import "bootstrap4/nav";
-@import "bootstrap4/navbar";
-@import "bootstrap4/card";
-@import "bootstrap4/breadcrumb";
-@import "bootstrap4/pagination";
-@import "bootstrap4/badge";
-@import "bootstrap4/jumbotron";
-@import "bootstrap4/alert";
-@import "bootstrap4/progress";
-@import "bootstrap4/media";
-@import "bootstrap4/list-group";
-@import "bootstrap4/close";
-@import "bootstrap4/modal";
-@import "bootstrap4/tooltip";
-@import "bootstrap4/popover";
-@import "bootstrap4/carousel";
-@import "bootstrap4/utilities";
+@import "~bootstrap/scss/bootstrap";
+@import "~material-design-icons/iconfont/material-icons";
+@import "admin-custom";
+
+
+
 
 // font-awesome override
-$fa-font-path:        "../css/fonts";
-$fa-inverse: theme-color("info");
-@import 'font-awesome/font-awesome';
-@import 'jquery-ui/jquery-ui';
-@import 'jquery-ui/jquery-ui.structure.min.scss';
-@import 'jquery-ui/jquery-ui.theme.min.scss';
-@import "plugins/jquery-growl";
-@import "plugins/chosen";
-@import "plugins/owl.carousel";
-@import "plugins/vis";
-@import "admin-custom";
+//$fa-font-path:        "../css/fonts";
+//$fa-inverse: theme-color("info");
+//@import 'font-awesome/font-awesome';
+//@import 'jquery-ui/jquery-ui';
+//@import 'jquery-ui/jquery-ui.structure.min.scss';
+//@import 'jquery-ui/jquery-ui.theme.min.scss';
+//@import "plugins/jquery-growl";
+//@import "plugins/chosen";
+//@import "plugins/owl.carousel";
+//@import "plugins/vis";

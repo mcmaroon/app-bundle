@@ -111,6 +111,8 @@
     {% block indexafterform %}
     {% endblock indexafterform %}
 
-    {{ knp_pagination_render(pagination) }}
+    <div class="pagination-wrapper">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 
 {% endblock body %}
