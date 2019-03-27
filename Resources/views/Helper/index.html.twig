@@ -7,7 +7,7 @@
     {% set defaultRoutingEntryName = null %}
 
     {% if classShortName is defined %}
-        <h1>{{ ('adminmenu.'~classShortName~'.list')|trans }}
+        <h1>{{ ('menu.'~classShortName~'.index')|trans }}
             <span class="badge badge-dark">{{ pagination.getTotalItemCount }}</span>
         </h1>
         {% if (classShortName~'_show')|routeExists %}

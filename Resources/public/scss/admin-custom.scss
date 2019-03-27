@@ -1,3 +1,7 @@
+#container {
+    padding-top: 50px;
+}
+
 .navbar {
     //@include box-shadow($btn-box-shadow);
     @extend .py-1;
@@ -184,11 +188,17 @@ table.table-index {
 }
 
 .material-icons {
-    font-size: $font-size-base;
+    &.material-icons-small {
+        font-size: $font-size-base;
+    }
 }
 
 .pagination-wrapper {
     @extend .d-flex;
     @extend .justify-content-center;
     @extend .p-5;
+}
+
+pre, code {
+    //max-width: 100%;
 }

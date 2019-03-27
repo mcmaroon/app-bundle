@@ -36,6 +36,8 @@ global:
             error: Błąd usuwania wpisu.
             forcelock: Usunięcie tego wpisu spowodowałoby kaskadowe usunięcie niezbędnych relacji. Możliwość usunięcia została zablokowana.
             foreignkey: Błąd usuwania wpisu. Sprawdź kaskadowość relacji.
+        open:
+            newtab: Otwórz w nowym oknie
 
 adminmenu:
     front: Strona główna

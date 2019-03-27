@@ -226,7 +226,7 @@ abstract class AbstractController extends Controller implements AbstractControll
             
         }
 
-        return $this->render($this->getViewPath() . ':edit.html.twig', array(
+        return $this->render($this->getViewPath() . '/edit.html.twig', array(
                     'entity' => $entity,
                     'form' => $form->createView()
         ));
@@ -254,7 +254,7 @@ abstract class AbstractController extends Controller implements AbstractControll
             return $this->redirect($this->generateUrl(strtolower($this->entityName) . '_edit', array('id' => $entity->getId())));
         }
 
-        return $this->render($this->getViewPath() . ':edit.html.twig', array(
+        return $this->render($this->getViewPath() . '/edit.html.twig', array(
                     'entity' => $entity,
                     'form' => $form->createView(),
         ));
@@ -281,7 +281,7 @@ abstract class AbstractController extends Controller implements AbstractControll
         $entity = $this->getControllerEntity();
         $form = $this->createCreateForm($entity);
 
-        return $this->render($this->getViewPath() . ':edit.html.twig', array(
+        return $this->render($this->getViewPath() . '/edit.html.twig', array(
                     'classShortName' => strtolower($this->entityName),
                     'entity' => $entity,
                     'form' => $form->createView(),

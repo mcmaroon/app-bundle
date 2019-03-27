@@ -16,7 +16,7 @@ abstract class AbstractAdminTreeController extends AbstractAdminController {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository($this->getControllerBundleName() . ':' . $this->entityName);
 
-        return $this->render($this->getViewPath() . ':tree.html.twig', array(
+        return $this->render($this->getViewPath() . '/tree.html.twig', array(
                     'classShortName' => strtolower($this->entityName),
                     'list' => $repository->getTreeList($this->getControllerBundleName() . ':' . $this->entityName),
                     'ajaxLoading' => 0,

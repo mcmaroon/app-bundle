@@ -7,7 +7,9 @@
     {% block edithead %}
         {% if classShortName is defined %}
             <div class="page-header">
-                <h1>{{ ('adminmenu.'~classShortName~'.edit')|trans }}</h1>
+                <h1>{{ ('menu.'~classShortName~'.default')|trans }}
+                    <span class="badge badge-dark">id: {{ entity.id }}</span>
+                </h1>
             </div>
         {% endif %}
     {% endblock edithead %}

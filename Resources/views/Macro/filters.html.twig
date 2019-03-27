@@ -101,11 +101,11 @@
 {% endmacro %}
 
 {% macro activeView(value) %}
-    <div class="text-center">
+    <div class="active-inactive">
         {% if value|default(0) %}
-            <span class="fa fa-lg fa-check-circle fa-success"></span>
+            <i class="material-icons">check_circle</i>
         {% else %}
-            <span class="fa fa-lg fa-circle-o fa-danger"></span>
+            <i class="material-icons">highlight_off</i>
         {% endif %}
     </div>
 {% endmacro %}

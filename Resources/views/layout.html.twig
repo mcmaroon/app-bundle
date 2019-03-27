@@ -54,10 +54,10 @@
         {% endblock beforealerts %}
 
         {% block alerts %}
-            <div class="alerts {% if is_granted('ROLE_ADMINISTRATOR') or is_granted('ROLE_SUPER_ADMIN') %}sr-only{% endif %}">
+            <div class="alerts {% if is_granted('ROLE_ADMINISTRATOR') or is_granted('ROLE_SUPER_ADMIN') %}alerts-admin{% endif %}">
                 {% for label, flashes in app.session.flashbag.all %}
                     {% for flash in flashes %}
-                        <div class="alert alert-{{ label }} growl" data-type="{{ label }}" role="alert">
+                        <div class="alert alert-{{ label }}" data-type="{{ label }}" role="alert">
                             <span class="alert-icon fa fa-alert-{{ label }}"></span>
                             <span class="alert-caret fa fa-caret-right"></span>
                             {{ flash }}
