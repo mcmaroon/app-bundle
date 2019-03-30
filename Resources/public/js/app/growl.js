@@ -13,7 +13,11 @@
                     warning: 'warning',
                     danger: 'error'
                 },
-                duration: 10000
+                growlOptions: {
+                    duration: 10000,
+                    location: 'br',
+                    size: 'medium',
+                }
             };
 
             self.settings = $.extend({}, defaults, options);
@@ -24,20 +28,17 @@
              * @param {integer} duration optional, default 10000 ms
              * @returns {growl}
              */
-            self.add = function (message, growlType, duration) {
+            self.add = function (message, growlType) {
 
                 var message = String(message);
                 var growlType = (typeof growlType === 'string' && typeof self.settings.growlTypesMap[growlType] !== 'undefined') ? self.settings.growlTypesMap[growlType] : 'notice';
-                var duration = (parseInt(duration) ? parseInt(duration) : self.settings.duration);
 
                 if (typeof $.growl[growlType] === 'function') {
-                    $.growl[growlType]({
+                    var options = self.settings = $.extend({
                         title: '',
-                        message: message,
-                        size: "medium",
-                        duration: duration,
-                        location: "br"
-                    });
+                        message: message
+                    }, self.settings.growlOptions);
+                    $.growl[growlType](options);
                 }
 
             };
