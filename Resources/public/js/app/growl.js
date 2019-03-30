@@ -44,6 +44,7 @@
 
             self.init = function () {
                 if (self.selector.length) {
+                    self.selector.parent('.alerts').addClass('sr-only');
                     $.each(self.selector, function (index, value) {
                         var growl = $(this);
                         var growlType = growl.data('type');

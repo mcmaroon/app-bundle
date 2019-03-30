@@ -1,7 +1,7 @@
 (function ($) {
 
     if (typeof APP.growl === 'function') {
-        new APP.growl('.growl', {}).init();
+        new APP.growl('.alerts .alert', {}).init();
     }
 
     if (typeof APP.sortable === 'function' && typeof APP.settings.paths === 'object' && typeof APP.settings.paths.sortable === 'string') {
