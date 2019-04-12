@@ -4,6 +4,12 @@
         new APP.growl('.alerts .alert', {}).init();
     }
 
+    if (typeof APP.stat === 'function') {
+        new APP.stat('#stat', {
+            url: '/admin/stat/async'
+        });
+    }
+
     if (typeof APP.sortable === 'function' && typeof APP.settings.paths === 'object' && typeof APP.settings.paths.sortable === 'string') {
         if ($('.tree-wrapper').length) {
             new APP.sortable('.tree-list', {

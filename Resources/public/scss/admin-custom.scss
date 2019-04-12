@@ -128,8 +128,8 @@ table.table-index {
 }
 
 .preloader {
-    //padding-top: $nav-link-padding-y;
-    //background: transparent url("../css/images/preloader.gif") no-repeat scroll 55% 0%;
+    padding-top: $spacer;
+    background: transparent url("../images/preloader.gif") no-repeat scroll 55% 0%;
 }
 
 .map-sync {
