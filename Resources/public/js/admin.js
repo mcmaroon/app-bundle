@@ -4,6 +4,15 @@
         new APP.growl('.alerts .alert', {}).init();
     }
 
+    if (typeof $().sparkline === 'function') {
+        $('.sparklines').sparkline('html', {
+            width: '9rem',
+            height: '2rem',
+            chartRangeMin: 0,
+            spotRadius: 3,
+        });
+    }
+
     if (typeof APP.stat === 'function') {
         new APP.stat('#stat', {
             url: '/admin/stat/async'
