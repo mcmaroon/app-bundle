@@ -32,10 +32,8 @@
         new APP.previewSelect('.preview-select', {}).init();
     }
 
-    if (typeof APP.progress === 'function' && typeof APP.settings.paths === 'object' && typeof APP.settings.paths.convertprogress === 'string') {
-        new APP.progress('.progress', {
-            url: APP.settings.paths.convertprogress
-        }).init();
+    if (typeof APP.progress === 'function') {
+        new APP.progress('[data-js="progress"]', {}).init();
     }
 
     if (typeof APP.uploadmultiple === 'function') {

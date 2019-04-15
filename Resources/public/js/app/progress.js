@@ -12,8 +12,8 @@
             self.xhr = null;
 
             var defaults = {
-                waitingClassSelector: 'waiting',
-                statusPrefixSelector: 'progress-bar-',
+                waitingClassSelector: '.waiting',
+                statusPrefixSelector: 'bg-',
                 wrapperSelector: '.progress-wrapper',
                 convertStartSelector: '.convert-start',
                 convertEndSelector: '.convert-end',
@@ -28,9 +28,11 @@
 
             self.settings = $.extend({}, defaults, options);
 
+            self.settings.url = $(self.selector).data('progress-url');
+
             self.getIds = function () {
                 var ids = {};
-                $.each($(self.selector + '.' + self.settings.waitingClassSelector), function (index, value) {
+                $.each($(self.selector).find(self.settings.waitingClassSelector), function (index, value) {
                     if (typeof $(this).data('id') === 'number') {
                         ids[$(this).data('id')] = $(this).data('id');
                     }
@@ -39,7 +41,7 @@
             };
 
             self.setPercentStatus = function (item) {
-                var $item = $(self.selector + '.' + self.settings.waitingClassSelector + "[data-id='" + item.id + "']");
+                var $item = $(self.selector + ' ' + self.settings.waitingClassSelector + "[data-id='" + item.id + "']");
                 if ($item.length) {
                     var progress = parseInt(item.progress);
                     var defaultStatusKey = Object.keys(self.settings.percentStatuses)[0];
@@ -87,7 +89,7 @@
                         if (typeof response.items === 'object' && Object.keys(response.items).length) {
                             $.each(response.items, function (key, item) {
 
-                                var $item = $(self.selector + '.' + self.settings.waitingClassSelector + "[data-id='" + item.id + "']");
+                                var $item = $(self.selector + ' ' + self.settings.waitingClassSelector + "[data-id='" + item.id + "']");
 
                                 if ($item.length) {
 
@@ -102,16 +104,16 @@
                                     self.setPercentStatus(item);
 
                                     if (parseInt(item.progress) >= 100) {
-                                        $item.children().text(item.time);
-                                        $item.removeClass(self.settings.waitingClassSelector);
+                                        $item.children().text(item.info);
+                                        //$item.removeClass(self.settings.waitingClassSelector);
 
                                         if (typeof APP.growl === 'function') {
-                                            new APP.growl('.growl').add('Id' + item.id + ' - Name: ' + item.name + ' - converted', 'success', 5000);
+                                            //new APP.growl('.growl').add('Id' + item.id + ' - Name: ' + item.name + ' - converted', 'success', 5000);
                                         }
                                     }
 
                                     if (parseInt(item.progress) < 100) {
-                                        $item.children().text(item.progress);
+                                        $item.children().text(item.info);
                                     }
 
                                 }
@@ -128,7 +130,7 @@
             };
 
             self.init = function () {
-                if ($(self.selector + '.' + self.settings.waitingClassSelector).length) {
+                if ($(self.selector).length && $(self.selector).find(self.settings.waitingClassSelector).length) {
                     self.loop();
                 }
             };
