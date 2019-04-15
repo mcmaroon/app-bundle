@@ -9,7 +9,8 @@
             width: '9rem',
             height: '2rem',
             chartRangeMin: 0,
-            spotRadius: 3,
+            spotRadius: 2,
+            valueSpots:{'0:':'red'}
         });
     }
 
