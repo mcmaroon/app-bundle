@@ -7,7 +7,8 @@ use Doctrine\ORM\EntityRepository;
 use App\AppBundle\Helper\Filters\IdFilter;
 use App\AppBundle\Helper\AbstractRepositoryInterface;
 
-abstract class AbstractRepository extends EntityRepository implements AbstractRepositoryInterface {
+abstract class AbstractRepository extends EntityRepository implements AbstractRepositoryInterface
+{
 
     private $filters = array();
     private $whitelistFilters = array();
@@ -17,19 +18,22 @@ abstract class AbstractRepository extends EntityRepository implements AbstractRe
 
     // ~
 
-    public final function getWhere() {
-        return (array) $this->where;
+    public final function getWhere()
+    {
+        return (array)$this->where;
     }
 
     // ~
 
-    public final function getHaving() {
-        return (array) $this->having;
+    public final function getHaving()
+    {
+        return (array)$this->having;
     }
 
     // ~
 
-    public final function setFilters(array $filters = array()) {
+    public final function setFilters(array $filters = array())
+    {
         $this->where = array();
         $this->having = array();
         foreach ($filters as $key => $filter) {
@@ -40,24 +44,27 @@ abstract class AbstractRepository extends EntityRepository implements AbstractRe
                 $filters[$key] = implode(',', $filters[$key]);
             }
         }
-        $this->filters = array_filter((array) $filters, 'strlen');
+        $this->filters = array_filter((array)$filters, 'strlen');
     }
 
     // ~
 
-    public final function getFilters() {
-        return (array) $this->filters;
+    public final function getFilters()
+    {
+        return (array)$this->filters;
     }
 
     // ~
 
-    public final function getFiltersCacheKey() {
+    public final function getFiltersCacheKey()
+    {
         return str_replace([' '], [''], implode($this->getFilters(), '-'));
     }
 
     // ~
 
-    public final function getFilter($filtername) {
+    public final function getFilter($filtername)
+    {
         if (isset($this->filters[$filtername]) && strlen(trim($this->filters[$filtername]))) {
             return trim($this->filters[$filtername]);
         }
@@ -66,29 +73,33 @@ abstract class AbstractRepository extends EntityRepository implements AbstractRe
 
     // ~
 
-    public final function setWhitelistFilters(array $filters) {
-        $this->whitelistFilters = array_filter((array) $filters, 'strlen');
+    public final function setWhitelistFilters(array $filters)
+    {
+        $this->whitelistFilters = array_filter((array)$filters, 'strlen');
     }
 
     // ~
 
-    public final function getWhitelistFilters() {
-        return (array) $this->whitelistFilters;
+    public final function getWhitelistFilters()
+    {
+        return (array)$this->whitelistFilters;
     }
 
     // ~
-    
-    public final function hasJoined(){
-        return (boolean) $this->hasJoined;
+
+    public final function hasJoined()
+    {
+        return (boolean)$this->hasJoined;
     }
-   
+
     // ~
 
-    public final function getList() {
+    public final function getList(): QueryBuilder
+    {
 
         $queryBuilder = $this->createQueryBuilder('r');
         $queryBuilder = $this->setSelect($queryBuilder);
-        
+
         // ~
 
         $this->defaultQueryFilters();
@@ -102,22 +113,24 @@ abstract class AbstractRepository extends EntityRepository implements AbstractRe
         };
 
         $this->hasJoined = \count($queryBuilder->getDQLPart('join')) ? true : false;
-        
+
+        $sql = $queryBuilder->getQuery()->getSQL();
         return $queryBuilder;
     }
 
     // ~
 
-    public function setSelect($queryBuilder) {
+    public function setSelect($queryBuilder)
+    {
         $queryBuilder->select(array(
-                    'obj' => 'r AS obj',
-                    'id' => 'r.id AS id',
-                    'name' => 'r.name AS name',
-                    'created' => 'r.createdAt AS created',
-                    'edited' => 'r.editedAt AS edited',
-                    'active' => 'r.active AS active'
+            'obj' => 'r AS obj',
+            'id' => 'r.id AS id',
+            'name' => 'r.name AS name',
+            'created' => 'r.createdAt AS created',
+            'edited' => 'r.editedAt AS edited',
+            'active' => 'r.active AS active'
         ));
-        
+
         return $queryBuilder;
     }
 
@@ -130,7 +143,8 @@ abstract class AbstractRepository extends EntityRepository implements AbstractRe
      * @param type $queryField example r.id
      * @throws \Exception
      */
-    public final function addWhereFilter($filterType, $filtername, $queryField) {
+    public final function addWhereFilter($filterType, $filtername, $queryField)
+    {
         $methodName = 'add' . ucfirst($filterType) . 'Filter';
         if (!method_exists($this, $methodName)) {
             throw new \Exception('Invalid filter type. See in ' . get_parent_class($this) . ' if ' . $methodName . ' method exists or implement this method in your EntityRepository');
@@ -150,7 +164,8 @@ abstract class AbstractRepository extends EntityRepository implements AbstractRe
      * @param type $queryField example r.id
      * @throws \Exception
      */
-    public final function addHavingFilter($filterType, $filtername, $queryField) {
+    public final function addHavingFilter($filterType, $filtername, $queryField)
+    {
         $methodName = 'add' . ucfirst($filterType) . 'Filter';
         if (!method_exists($this, $methodName)) {
             throw new \Exception('Invalid filter type. See in ' . get_parent_class($this) . ' if ' . $methodName . ' method exists or implement this method in your EntityRepository');
@@ -178,7 +193,8 @@ abstract class AbstractRepository extends EntityRepository implements AbstractRe
 
     // ~
 
-    private final function addIntFilter($type, $filtername, $queryField) {
+    private final function addIntFilter($type, $filtername, $queryField)
+    {
         if (false !== $filter = $this->getFilter($filtername)) {
             $id = new IdFilter();
             $idResult = $id->parse($filter)->genSQL($queryField);
@@ -190,7 +206,8 @@ abstract class AbstractRepository extends EntityRepository implements AbstractRe
 
     // ~
 
-    private final function addEqFilter($type, $filtername, $queryField) {
+    private final function addEqFilter($type, $filtername, $queryField)
+    {
         if (false !== $filter = $this->getFilter($filtername)) {
             $this->{$type}[] = $queryField . " = '" . $filter . "'";
         }
@@ -198,7 +215,8 @@ abstract class AbstractRepository extends EntityRepository implements AbstractRe
 
     // ~
 
-    private final function addGteFilter($type, $filtername, $queryField) {
+    private final function addGteFilter($type, $filtername, $queryField)
+    {
         if (false !== $filter = $this->getFilter($filtername)) {
             $this->{$type}[] = $queryField . " >= '" . $filter . "'";
         }
@@ -206,7 +224,8 @@ abstract class AbstractRepository extends EntityRepository implements AbstractRe
 
     // ~
 
-    private final function addLteFilter($type, $filtername, $queryField) {
+    private final function addLteFilter($type, $filtername, $queryField)
+    {
         if (false !== $filter = $this->getFilter($filtername)) {
             $this->{$type}[] = $queryField . " <= '" . $filter . "'";
         }
@@ -214,7 +233,8 @@ abstract class AbstractRepository extends EntityRepository implements AbstractRe
 
     // ~
 
-    private final function addGtelteFilter($type, $filtername, $queryField) {
+    private final function addGtelteFilter($type, $filtername, $queryField)
+    {
         $filtername = str_replace(array('_min', '_max'), '', $filtername);
         if (false !== $filter = $this->getFilter($filtername . '_min')) {
             $this->{$type}[] = $queryField . " >= '" . $filter . "'";
@@ -226,7 +246,8 @@ abstract class AbstractRepository extends EntityRepository implements AbstractRe
 
     // ~
 
-    private final function addLikeFilter($type, $filtername, $queryField) {
+    private final function addLikeFilter($type, $filtername, $queryField)
+    {
         if (false !== $filter = $this->getFilter($filtername)) {
             $this->{$type}[] = $queryField . " LIKE '%" . $filter . "%'";
         }
@@ -234,7 +255,8 @@ abstract class AbstractRepository extends EntityRepository implements AbstractRe
 
     // ~
 
-    private final function addDateFilter($type, $filtername, $queryField) {
+    private final function addDateFilter($type, $filtername, $queryField)
+    {
         $filtername = str_replace(array('_min', '_max'), '', $filtername);
         if (isset($this->filters[$filtername . '_min'])) {
             $this->{$type}[] = "DATE(" . $queryField . ") >= '" . $this->filters[$filtername . '_min'] . "'";
@@ -246,7 +268,8 @@ abstract class AbstractRepository extends EntityRepository implements AbstractRe
 
     // ~
 
-    private final function addBooleanFilter($type, $filtername, $queryField) {
+    private final function addBooleanFilter($type, $filtername, $queryField)
+    {
         if (false !== $filter = $this->getFilter($filtername)) {
             if (in_array($filter, array(0, 1))) {
                 $this->{$type}[] = $queryField . " = " . $filter;
@@ -256,7 +279,8 @@ abstract class AbstractRepository extends EntityRepository implements AbstractRe
 
     // ~
 
-    public function defaultQueryFilters() {
+    public function defaultQueryFilters()
+    {
 
         $this->addWhereFilter('int', 'id', 'r.id');
 
@@ -273,13 +297,15 @@ abstract class AbstractRepository extends EntityRepository implements AbstractRe
 
     // ~
 
-    public function mapIds(array $ids) {
+    public function mapIds(array $ids)
+    {
         return array_values(array_unique(array_filter(array_map("intval", array_keys($ids)))));
     }
 
     // ~
 
-    public final function findByIds(array $ids) {
+    public final function findByIds(array $ids)
+    {
 
         $ids = $this->mapIds($ids);
 
@@ -296,7 +322,8 @@ abstract class AbstractRepository extends EntityRepository implements AbstractRe
 
     // ~
 
-    protected function findByIdsResults($queryBuilder) {
+    protected function findByIdsResults($queryBuilder)
+    {
         return $queryBuilder->getQuery()->getResult();
     }
 

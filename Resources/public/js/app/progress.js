@@ -83,7 +83,13 @@
                         ids: ids
                     },
                     error: function (request, status, error) {
-
+                        var prevInterval = self.settings.interval;
+                        self.settings.interval = 60000;
+                        self.loop();
+                        self.settings.interval = prevInterval;
+                        if (typeof APP.growl === 'function') {
+                            new APP.growl('.growl').add('Progress error: ' + error, 'danger', 5000);
+                        }
                     },
                     success: function (response, status, request) {
                         if (typeof response.items === 'object' && Object.keys(response.items).length) {
@@ -92,13 +98,6 @@
                                 var $item = $(self.selector + ' ' + self.settings.waitingClassSelector + "[data-id='" + item.id + "']");
 
                                 if ($item.length) {
-
-                                    var wrapperSelector = $item.closest(self.settings.wrapperSelector);
-                                    if (wrapperSelector.length) {
-                                        wrapperSelector.find(self.settings.convertStartSelector).text(item.convert_start);
-                                        wrapperSelector.find(self.settings.convertEndSelector).text(item.convert_end);
-                                    }
-
                                     $item.children().css('width', parseInt(item.progress) + '%');
 
                                     self.setPercentStatus(item);

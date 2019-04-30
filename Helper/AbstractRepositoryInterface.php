@@ -2,9 +2,11 @@
 
 namespace App\AppBundle\Helper;
 
-interface AbstractRepositoryInterface {
+use Doctrine\ORM\QueryBuilder;
 
-    public function getList();
+interface AbstractRepositoryInterface
+{
+    public function getList(): QueryBuilder;
 
     public function defaultQueryFilters();
 
