@@ -126,8 +126,8 @@ filters:
 stat:
     enum:
         view: Wyświetlony razy
-        usercount: Wszyscy użytkownicy
-        usercountlogin: Użytkownicy zalogowani danego dnia
-        usercountloginfail: Użytkownicy błędnie zalogowani danego dnia
-        usercountregister: Użytkownicy zarejestrowani danego dnia
-        usercountregisterfail: Użytkownicy błędnie zarejestrowani danego dnia
+        allUserCount: Wszyscy użytkownicy
+        todayUserCountLogin: Użytkownicy zalogowani danego dnia
+        todayUserCountLoginFail: Użytkownicy błędnie zalogowani danego dnia
+        todayUserCountRegister: Użytkownicy zarejestrowani danego dnia
+        todayUserCountRegisterFail: Użytkownicy błędnie zarejestrowani danego dnia
