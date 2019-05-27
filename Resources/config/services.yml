@@ -1,5 +1,16 @@
 services:
 
+    app.menu_builder:
+        class: App\Menu\MenuBuilder
+        arguments: ["@security.authorization_checker", "@service_container", "@knp_menu.factory"]
+
+    app.admin_menu:
+        class: Knp\Menu\MenuItem
+        factory: ["@app.menu_builder", createAdminMenu]
+        arguments: ["@request_stack"]
+        tags:
+            - { name: knp_menu.menu, alias: adminMenu }
+
     
 #    app.logEntityListener:
 #        class: Symfony\Bridge\Monolog\Logger

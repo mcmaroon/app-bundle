@@ -159,19 +159,8 @@ class AbstractMenuBuilder
 
     // ~
 
-    protected function getBundleName()
-    {
-        return '';
-    }
-
-    // ~
-
     protected function createAdminMenuBody(ItemInterface &$menu)
     {
-        if (!\strlen($this->getBundleName())) {
-            throw new \Exception('Invalid Bundle Name in AbstractMenuBuilder');
-        }
-
         $routes = [];
         $path = $this->container->get('kernel')->getRootDir() . DIRECTORY_SEPARATOR . 'Entity';
 
