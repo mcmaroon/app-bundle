@@ -109,7 +109,7 @@ abstract class AbstractController extends Controller implements AbstractControll
         } catch (\Exception $exc) {
             $result = $repository->getList();
             $paginator = $this->get('knp_paginator');
-            $pagination = $paginator->paginate($result, $request->query->getInt('page', 1), $request->query->getInt('limit', 50), array('wrap-queries' => $repository->hasJoined()));
+            $pagination = $paginator->paginate($result, $page, $limit, array('wrap-queries' => $repository->hasJoined()));
         }
 
         // ~

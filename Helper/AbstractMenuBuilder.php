@@ -173,6 +173,8 @@ class AbstractMenuBuilder
             }
         }
 
+        ksort($routes);
+
         if (\count($routes)) {
             foreach ($routes as $route) {
                 $this->addChild($menu, [$route]);
