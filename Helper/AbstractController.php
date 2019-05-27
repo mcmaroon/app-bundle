@@ -5,9 +5,9 @@ namespace App\AppBundle\Helper;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use App\AppBundle\Helper\AbstractControllerInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Cookie;
+use App\AppBundle\Helper\AbstractControllerInterface;
 use App\AppBundle\Event\AppEntityEvent;
 
 /**
@@ -94,15 +94,15 @@ abstract class AbstractController extends Controller implements AbstractControll
         // ~
 
         try {
-            $pool = $this->container->get('cache');
-            $item = $pool->getItem($cacheKey);
+            $cache = $this->get('cache.app');
+            $item = $cache->getItem($cacheKey);
             if (!$item->isHit()) {
                 $result = $repository->getList();
                 $paginator = $this->get('knp_paginator');
                 $pagination = $paginator->paginate($result, $page, $limit, array('wrap-queries' => $repository->hasJoined()));
-                $item->set($pagination)->setTags(['index']);
+                $item->set($pagination);
                 $item->expiresAfter(60);
-                $pool->save($item);
+                $cache->save($item);
             } else {
                 $pagination = $item->get();
             }
