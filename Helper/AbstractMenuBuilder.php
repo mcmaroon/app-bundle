@@ -1,4 +1,5 @@
 <?php
+
 namespace App\AppBundle\Helper;
 
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -94,9 +95,10 @@ class AbstractMenuBuilder
 
     protected function addChild(ItemInterface &$menu, array $childrens, array $attributes = [], array $linkAttributes = [])
     {
+        $menuName = $menu->getName();
         $routeName = $childrens[0];
         if ($this->hasRouteExists($routeName)) {
-            $el = $menu->addChild('menu.' . $routeName . '.default', array('route' => $routeName));
+            $el = $menu->addChild($menuName . '.' . $routeName . '.default', array('route' => $routeName));
             $el->setAttributes($this->mergeAttributes($attributes));
             $el->setLinkAttributes($this->mergeLinkAttributes($linkAttributes));
             if (\count($childrens)) {
@@ -110,6 +112,7 @@ class AbstractMenuBuilder
 
     protected function addChildrens(\Knp\Menu\MenuItem $menu, $parentRouting = '', array $childrens = array(), array $attributes = [], array $linkAttributes = [])
     {
+        $menuName = $menu->getName();
         if ($this->hasRouteExists($parentRouting)) {
             $hasLast = false;
             $totalRouteCount = 0;
@@ -117,11 +120,11 @@ class AbstractMenuBuilder
                 $routeCount = 0;
                 foreach (['index' => ['icon' => 'fa-list'], 'tree' => ['icon' => 'fa-arrows'], 'new' => ['icon' => 'fa-pencil']] as $routeSuffix => $typeAttributes) {
                     $routeName = $route . '_' . $routeSuffix;
-                    $fullLabel = 'menu.' . $route . '.' . $routeSuffix;
+                    $fullLabel = $menuName . '.' . $route . '.' . $routeSuffix;
                     if ($this->hasRouteExists($routeName)) {
                         $routeCount++;
 
-                        $menu['menu.' . $parentRouting . '.default']->addChild($fullLabel, [
+                        $menu[$menuName . '.' . $parentRouting . '.default']->addChild($fullLabel, [
                             'route' => $routeName
                         ])->setAttributes($this->mergeAttributes(\array_merge($typeAttributes, ['icon-direction' => 'left'])))->setLinkAttribute('class', 'nav-link');
                     }
@@ -131,11 +134,11 @@ class AbstractMenuBuilder
                     $hasLast = true;
                 }
                 if ($routeCount > 1 && !$hasLast) {
-                    $menu['menu.' . $parentRouting . '.default']->addChild($fullLabel . '.divider')->setAttributes(['class' => 'dropdown-divider']);
+                    $menu[$menuName . '.' . $parentRouting . '.default']->addChild($fullLabel . '.divider')->setAttributes(['class' => 'dropdown-divider']);
                 }
             }
             if ($totalRouteCount > 1) {
-                $el = $menu['menu.' . $parentRouting . '.default'];
+                $el = $menu[$menuName . '.' . $parentRouting . '.default'];
                 $el->setAttributes($this->mergeAttributes(\array_merge(['class' => 'dropdown'], $attributes)));
                 $el->setLinkAttributes($this->mergeLinkAttributes(\array_merge(['class' => 'dropdown-toggle', 'data-toggle' => 'dropdown'], $linkAttributes)));
                 $el->setChildrenAttributes(['class' => 'dropdown-menu']);
@@ -162,14 +165,14 @@ class AbstractMenuBuilder
     protected function createAdminMenuBody(ItemInterface &$menu)
     {
         $routes = [];
-        $path = $this->container->get('kernel')->getRootDir() . DIRECTORY_SEPARATOR . 'Entity';
-
-        $finder = new Finder();
-        $files = $finder->files()->in($path)->name('*.php');
-        foreach ($files as $file) {
-            $filename = \strtolower(\str_replace(['.php', 'Translation'], '', $file->getFileName()));
-            $routes[$filename] = $filename;
+        $router = $this->container->get('router');
+        foreach ($router->getRouteCollection()->all() as $key => $item) {
+            if (strpos($key, '_index')) {
+                $itemName = str_replace('_index', '', $key);
+                $routes[$itemName] = $itemName;
+            }
         }
+
         if (\count($routes)) {
             foreach ($routes as $route) {
                 $this->addChild($menu, [$route]);
