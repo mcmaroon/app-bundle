@@ -40,7 +40,7 @@ abstract class AbstractController extends Controller implements AbstractControll
 
     // ~
 
-    public function index(Request $request) {
+    public function indexAction(Request $request) {
 
         $translated = $this->get('translator');
         $em = $this->getDoctrine()->getManager();

@@ -145,40 +145,6 @@ assetic:
             inputs: '@AppAppBundle/Resources/public/images/chosen-sprite@2x.png'
             output: 'css/images/chosen-sprite@2x.png'
 
-# Doctrine Configuration
-doctrine:
-    dbal:
-        # http://blog.kowalczyk.cc/2013/01/25/doctrine2-blad-unknown-database-type-enum-requested-mysqlplatform-may-not-support-it/
-        mapping_types:
-            enum: string
-    orm:
-        dql:
-            string_functions:
-                IF: App\AppBundle\Doctrine\Extension\IfElse 
-                GROUP_CONCAT: App\AppBundle\Doctrine\Extension\GroupConcat
-                LEVENSHTEIN: App\AppBundle\Doctrine\Extension\Levenshtein
-                LEVENSHTEIN_RATIO: App\AppBundle\Doctrine\Extension\LevenshteinRatio
-                DATE: App\AppBundle\Doctrine\Extension\Date
-                MATCH_AGAINST: App\AppBundle\Doctrine\Extension\MatchAgainst
-            numeric_functions:
-                ROUND: App\AppBundle\Doctrine\Extension\Round
-                ACOS: App\AppBundle\Doctrine\Extension\Acos
-                COS: App\AppBundle\Doctrine\Extension\Cos
-                SIN: App\AppBundle\Doctrine\Extension\Sin
-                RADIANS: App\AppBundle\Doctrine\Extension\Radians
-        filters:
-            softdeleteable:
-                class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
-                enabled: true
-
-# StofDoctrineExtensionsBundle Configuration
-stof_doctrine_extensions:
-    orm:
-        default:
-            softdeleteable: true
-            translatable: true
-            sluggable: true
-
 knp_paginator:
     page_range: 5                      # default page range used in pagination control
     default_options:
